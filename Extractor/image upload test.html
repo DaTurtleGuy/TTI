@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader Test</title>
+</head>
+<body>
+    <h1>Image Uploader Test</h1>
+    <input type="file" id="fileInput">
+    <button onclick="handleUpload()">Upload Image</button>
+    <div id="output"></div>
+
+    <script>
+        function uploadImage(imageFile) {
+            const apiKey = '2e554cfeaedee7117b2977f67aadd376'; // Replace with your actual API key
+            const formData = new FormData();
+            formData.append('key', apiKey);
+            formData.append('image', imageFile);
+
+            return fetch('https://api.imgbb.com/1/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    const imageURL = data.data.url;
+                    return imageURL;
+                } else {
+                    throw new Error('Upload failed: ' + data.error.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error uploading image:', error);
+                throw error; // Rethrow the error for handling outside this function
+            });
+        }
+
+        function handleUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select an image file.');
+                return;
+            }
+
+            uploadImage(file)
+                .then(imageURL => {
+                    const outputDiv = document.getElementById('output');
+                    outputDiv.innerHTML = `<img src="${imageURL}" alt="Uploaded Image">`;
+                })
+                .catch(error => {
+                    alert('Error uploading image. Please try again.');
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
