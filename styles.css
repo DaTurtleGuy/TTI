@@ -832,6 +832,7 @@ body.isMobile #news-panel {
 #newsPanel {
     z-index: 999;
     position: fixed;
+    background-image: "https://ttalesinteractive.com/graphics/pencil.png";
 }
 
 #newsPanel .backgroundImage {

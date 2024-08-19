@@ -19,6 +19,8 @@ $(document).ready(function () {
 function adjustSizes() {
   $("#newsPanel").height($(window).height() * 0.98);
   $("#optionsPanel").height($(window).height() * 0.98);
+
+  
 }
 
 const panelStatus = {
