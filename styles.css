@@ -815,30 +815,49 @@ body.isMobile #news-panel {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Adjust the opacity as needed */
     z-index: 9998;
-    /* Ensure it's above other content */
     display: none;
-    /* Initially hidden */
+}
+
+#newsPanel, #optionsPanel {
+    background-color: black;
+    width: 25%;
+    height: 100%;
+    border: var(--border-color) 5px solid;
+    right: 0;
+    transition: right 0.5s ease;
+    min-width: 400px;
 }
 
 #newsPanel {
-    position: fixed;
-    background-color: black;
-    width: 25%;
-    height: 100%;
-    border: var(--border-color) 5px solid;
     z-index: 999;
-    right: 0;
-    transition: right 0.5s ease;
+    position: fixed;
+}
+
+#newsPanel .backgroundImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: opacity(0.1);
+    position: absolute;
 }
 
 #optionsPanel {
-    background-color: black;
-    width: 25%;
-    height: 100%;
-    border: var(--border-color) 5px solid;
     z-index: 998;
-    right: 0;
-    transition: right 0.5s ease;
+}
+.TurtlePanelContent {
+    width: 100%;
+    height: 100%;
+}
+.devComments {
+    width: 100%;
+    height: calc(100% - 100px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+#welcomeTitle {
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    margin-top: 20px;
 }
