@@ -1,3 +1,5 @@
+const panelStatus = {};
+
 function setCookie(name, value, daysToExpire) {
   var expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + daysToExpire);
@@ -5,7 +7,6 @@ function setCookie(name, value, daysToExpire) {
   document.cookie = name + "=" + value + expires + "; path=/";
 }
 
-// Helper function to get a cookie value
 function getCookie(name) {
   var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
   return match ? match[2] : null;
@@ -19,14 +20,13 @@ $(document).ready(function () {
 function adjustSizes() {
   $("#newsPanel").height($(window).height() * 0.98);
   $("#optionsPanel").height($(window).height() * 0.98);
-
-  
 }
 
-const panelStatus = {
-  optionsPanel: true,
-  newsPanel: true,
-};
+function loadPanelStatus() {
+
+}
+
+
 
 var animationInProgress = {};
 
@@ -34,6 +34,7 @@ async function togglePanel(panelId) {
   if (animationInProgress[panelId]) return; // If an animation is in progress, do nothing
 
   panelStatus[panelId] = !panelStatus[panelId];
+  setCookie("panelStatus", JSON.stringify(panelStatus), 999);
   var $div = $("#" + panelId);
   var width = $div.width();
   var expandedWidth = width;
