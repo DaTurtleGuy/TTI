@@ -1,0 +1,830 @@
+:root,
+:root.light {
+    --background: black;
+    --button-bg: #1D3938;
+    --button-bg-hover: ##434245;
+    --text-color: white;
+    --textarea-bg: #343836;
+    --selected-thread-bg: #343836;
+    --border-color: #bf9864;
+    --border-radius: 5px;
+    --avatar-bg: lightgrey;
+    --notification-bg-color: #005ac2;
+    --button-border-color: #bf9864;
+    --button-font-size: 0.825rem;
+}
+
+
+/* Detect browser dark mode and change variables */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #151515;
+        --button-bg: #1D3938;
+        --button-bg-hover: #444;
+        --text-color: white;
+        --textarea-bg: black;
+        --selected-thread-bg: #444;
+        --border-color: #bf9864;
+        --avatar-bg: #151515;
+        --button-border-color: #bf9864;
+    }
+}
+
+body,
+html {
+    margin: 0;
+    background: var(--background);
+    color: var(--text-color);
+    font-family: sans-serif;
+}
+
+body * {
+    box-sizing: border-box;
+    color: inherit;
+    font-family: inherit;
+}
+
+body a {
+    color: blue;
+}
+
+.messageText pre[data-markdown-codeblock] {
+    font-family: monospace;
+    background: rgb(35 35 35);
+    padding: 0.5rem;
+    color: rgb(232, 232, 232);
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+}
+
+.messageText p code {
+    font-family: monospace;
+    background: rgb(35 35 35);
+    padding: 0.125rem;
+    color: rgb(232, 232, 232);
+    border-radius: var(--border-radius);
+}
+
+.messageText table {
+    border-collapse: collapse;
+}
+
+.messageText table,
+.messageText th,
+.messageText td {
+    border: 3px solid var(--border-color);
+}
+
+button {
+    background: var(--button-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 0.125rem;
+    border: 3px solid var(--button-border-color);
+    font-size: var(--button-font-size);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: var(--button-bg-hover);
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+textarea {
+    background: var(--textarea-bg);
+    border: 1px solid var(--button-border-color);
+    border-radius: var(--border-radius);
+}
+
+input[type="text"],
+select {
+    background: var(--textarea-bg);
+    border: 1px solid var(--button-border-color);
+    border-radius: var(--border-radius);
+}
+
+#appOptions .appOptionButton {
+    width: 100%;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    min-height: 2rem;
+}
+
+#chatThreads {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 30px), #ffffff00 100%);
+    mask-image: linear-gradient(to bottom, black calc(100% - 30px), #ffffff00 100%);
+    padding-bottom: 2rem;
+}
+
+#chatThreads .thread,
+#chatThreads .threadFolder {
+    border-radius: var(--border-radius);
+    display: flex;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    position: relative;
+    user-select: none;
+}
+
+#chatThreads .thread,
+#chatThreads .threadFolder {
+    margin-top: 0.5rem;
+}
+
+#chatThreads .thread:first-child,
+#chatThreads .threadFolder:first-child {
+    margin-top: 0;
+}
+
+#chatThreads .threadFolder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatThreads .thread .favStar,
+#chatThreads .thread .changeFolderPath {
+    position: absolute;
+    font-size: 80%;
+    opacity: 0.5;
+    display: none;
+    text-shadow: 0px 1px 2px #515151;
+}
+
+#chatThreads .thread .favStar {
+    top: 0.0625rem;
+    left: 0.0625rem;
+}
+
+#chatThreads .thread .changeFolderPath {
+    bottom: 0.0625rem;
+    left: 0.0625rem;
+}
+
+body:not(.isMobile) #chatThreads .thread .favStar:hover {
+    opacity: 1;
+}
+
+#chatThreads .thread .changeFolderPath:hover {
+    opacity: 1;
+}
+
+#chatThreads .thread:hover .favStar,
+#chatThreads .thread:hover .changeFolderPath {
+    display: inline;
+}
+
+/* can't hover on mobile, so display button on selected thread: */
+body.isMobile #chatThreads .thread.selected .favStar,
+body.isMobile #chatThreads .thread.selected .changeFolderPath {
+    display: inline;
+}
+
+#chatThreads .thread .favStar[data-is-fav="true"] {
+    opacity: 1;
+    display: inline;
+}
+
+#chatThreads .thread:not(:first-child) {
+    margin-top: 0.5rem;
+}
+
+#chatThreads .thread .button {
+    opacity: 1;
+}
+
+#chatThreads .thread .button:hover {
+    opacity: 1;
+}
+
+#chatThreads .thread.selected {
+    background-color: var(--selected-thread-bg);
+}
+
+#chatThreads .thread .info {
+    max-width: 100%;
+}
+
+#chatThreads .thread .nameWrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 150px;
+    display: flex;
+}
+
+#chatThreads .thread .name {
+    /* truncate long thread names */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+}
+
+#chatThreads .thread .avatar,
+#characterSelection .character .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--border-radius);
+    min-width: 60px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--avatar-bg);
+}
+
+.character {
+    transition: background-color 0.3s ease;
+}
+
+.character:hover {
+    background-color: var(--button-bg-hover);
+}
+
+#messageFeed .message .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius);
+    min-width: 50px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--avatar-bg);
+}
+
+#chatThreads .characterEditButton {
+    font-size: 0.65rem;
+    opacity: 1;
+}
+
+#chatThreads .characterEditButton:hover {
+    opacity: 1;
+}
+
+/* hide threads scrollbar */
+#chatThreads {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+#chatThreads::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+/* hide message feed scrollbar */
+/* #messageFeed {
+-ms-overflow-style: none; 
+scrollbar-width: none; 
+}
+#messageFeed::-webkit-scrollbar { 
+display: none;  
+} */
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--button-bg);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--button-bg-hover);
+}
+
+
+#builtInChatInterfaceWrapper {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+#messageFeed .message {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#messageFeed .message .bottomButtons {
+    display: none;
+    position: absolute;
+    bottom: 0.25rem;
+    right: 0.5rem;
+}
+
+#messageFeed .message:hover .bottomButtons {
+    display: flex;
+}
+
+.emojiButton {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.emojiButton:hover {
+    opacity: 1;
+}
+
+#messageFeed .message.hiddenFromUser .showHiddenMessageButton {
+    display: inline-block;
+}
+
+#messageFeed .message:not(.hiddenFromUser) .showHiddenMessageButton {
+    display: none;
+}
+
+#messageFeed .message.hiddenFromUser .messageWrap {
+    display: none;
+}
+
+#messageFeed .message:not(.hiddenFromUser) .messageWrap {
+    display: flex;
+}
+
+#messageFeed .messageText p {
+    white-space: pre-wrap;
+}
+
+#messageFeed .messageText {
+    margin-top: 0.125rem;
+    overflow: hidden;
+    /* keep messageText content from "escaping" the message area */
+}
+
+#messageFeed .messageText p:first-child {
+    margin-top: 0;
+}
+
+#messageFeed .messageText img {
+    max-width: 100%;
+}
+
+#messageFeed>*:first-child {
+    margin-top: 3rem;
+}
+
+#characterFoldersList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+#characterFoldersList .characterFolder {
+    border: 3px solid var(--border-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+#characterSelection .character {
+    border: 3px solid var(--border-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+}
+
+#characterSelection .character .info .buttons {
+    margin-top: 0.25rem;
+}
+
+#characterSelection .character .info .buttons button {
+    font-size: 0.7rem;
+    margin-left: 0.25rem;
+}
+
+#characterList,
+#starterCharacterList,
+#secondCharacterList,
+#otherCharacterList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-gap: 0.5rem;
+    justify-content: center;
+}
+
+#characterFoldersList .characterFolder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#characterSelection .character {
+    user-select: none;
+}
+
+#customCodeIframeHorizontalResizeBar {
+    width: 5px;
+    background: var(--button-bg);
+    cursor: ew-resize;
+}
+
+#customCodeIframeHorizontalResizeBar:hover {
+    background: var(--button-bg-hover);
+}
+
+#userMessagesSentHistoryCtn {
+    margin-bottom: 0.25rem;
+    position: relative;
+}
+
+#userMessagesSentHistoryCtn:empty {
+    display: none;
+}
+
+#userMessagesSentHistoryCtn .historyItem {
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 85%;
+    overflow: hidden;
+    white-space: pre;
+    display: flex;
+}
+
+#userMessagesSentHistoryCtn .historyItem .text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-left: 0.25rem;
+}
+
+#userMessagesSentHistoryCtn .historyItem .deleteButton {
+    margin-left: auto;
+}
+
+#userMessagesSentHistoryCtn .historyItem:hover {
+    background: var(--background);
+}
+
+#userMessagesSentHistoryCtn .historyItem .pinButton,
+#userMessagesSentHistoryCtn .historyItem .deleteButton {
+    opacity: 1;
+}
+
+#userMessagesSentHistoryCtn .historyItem[data-is-pinned="true"] .pinButton {
+    opacity: 1;
+}
+
+body:not(.isMobile) #userMessagesSentHistoryCtn .historyItem .pinButton:hover,
+body:not(.isMobile) #userMessagesSentHistoryCtn .historyItem .deleteButton:hover {
+    opacity: 1;
+}
+
+#shortcutButtonsCtn {
+    margin-bottom: 0.25rem;
+    position: relative;
+    overflow-y: auto;
+}
+
+#shortcutButtonsCtn:empty {
+    display: none;
+}
+
+#shortcutButtonsCtn button:not(:first-child) {
+    margin-left: 0.25rem;
+}
+
+#characterSelectionOpenLeftColumnButton {
+    transform: scaleX(-1);
+}
+
+/* typing indicator from https://codepen.io/arthak/pen/rmqvgo */
+.tiblock {
+    align-items: center;
+    display: flex;
+    height: 17px;
+}
+
+.ticontainer {
+    display: inline-block;
+}
+
+.ticontainer .tidot {
+    background-color: #90949c;
+}
+
+.tidot {
+    animation: mercuryTypingAnimation 1.5s infinite ease-in-out;
+    border-radius: 2px;
+    display: inline-block;
+    height: 4px;
+    margin-right: 2px;
+    width: 4px;
+}
+
+@keyframes mercuryTypingAnimation {
+    0% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+
+    28% {
+        transform: translateY(-5px);
+    }
+
+    44% {
+        transform: translateY(0px);
+    }
+}
+
+.tidot:nth-child(1) {
+    animation-delay: 200ms;
+}
+
+.tidot:nth-child(2) {
+    animation-delay: 300ms;
+}
+
+.tidot:nth-child(3) {
+    animation-delay: 400ms;
+}
+
+#floating-window {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--background);
+    border: 4px solid var(--border-color);
+    border-radius: 8px;
+    color: #fff;
+    padding: 10px;
+    width: 400px;
+    /* Increased width */
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+.select-button,
+#get-alternate-btn {
+    background-color: var(--button-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 0.125rem;
+    border: 3px solid var(--button-border-color);
+    font-size: var(--button-font-size);
+    transition: background-color 0.3s ease;
+}
+
+#get-alternate-btn {
+    margin-left: 5px;
+}
+
+#fileForm {
+    margin-bottom: 10px;
+}
+
+#alternateGreetings p {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    position: relative;
+}
+
+#select-btn {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    transform: translateX(-50%);
+    background: var(--button-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 0.125rem;
+    border: 3px solid var(--button-border-color);
+    font-size: var(--button-font-size);
+    transition: background-color 0.3s ease;
+}
+
+
+#cancel-btn {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 5px;
+    background: var(--button-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 0.125rem;
+    border: 3px solid var(--button-border-color);
+    font-size: var(--button-font-size);
+    transition: background-color 0.3s ease;
+}
+
+/* Style for the custom file input button */
+.custom-file-input {
+    display: none;
+    /* Hide the default file input */
+}
+
+.custom-file-label {
+    background-color: #555;
+    color: #fff;
+    padding: 10px;
+    background: var(--button-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 0.125rem;
+    border: 3px solid var(--button-border-color);
+    font-size: var(--button-font-size);
+    transition: background-color 0.3s ease;
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.EloComment {
+    font-size: 14px;
+    color: #c34afc;
+    margin-left: 10px;
+}
+
+.EloCommentLink {
+    font-size: 14px;
+    color: #d47afd;
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+.TurtleComment {
+    font-size: 14px;
+    color: #39ca71;
+    margin-left: 10px;
+}
+
+.TurtleCommentLink {
+    font-size: 14px;
+    color: #5ad187;
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+/* Base styles for both panels */
+#options-panel,
+#news-panel {
+    display: block;
+    /* Ensure they are visible by default; adjust as needed */
+    width: 30%;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 500;
+    /* Significantly high to ensure visibility over other elements */
+    overflow: auto;
+    background-color: black;
+    /* Example background color */
+    color: lightblue;
+    /* Example text color */
+    border: 7px solid rgb(191, 152, 100);
+    display: none;
+    /* Initially hidden */
+    transition: right 0.5s ease;
+    /* Add a smooth transition effect */
+    animation-duration: 0.5s;
+    animation-name: slideIn;
+}
+
+#news-panel {
+    z-index: 501;
+}
+
+
+/* Mobile styles using .isMobile for both panels */
+body.isMobile #options-panel,
+body.isMobile #news-panel {
+    width: 100%;
+    /* Full width on mobile */
+    right: 0;
+    /* Ensure it's fully visible */
+}
+
+
+.news-panel-background,
+.options-panel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+#news-panel-content,
+#options-panel-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 40px);
+    padding: 20px;
+}
+
+#news-panel-content h2,
+#options-panel-content h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #45d4d1;
+}
+
+#news-panel-content p,
+#options-panel-content p {
+    font-size: 14px;
+    color: #45d4d1;
+    margin-left: 10px;
+    overflow: auto;
+}
+
+#news-panel-content a,
+#options-panel-content a {
+    text-decoration: underline;
+    margin-left: 10px;
+    color: lightblue;
+}
+
+
+@keyframes slideIn {
+    from {
+        right: -25%;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+.version {
+    text-align: center;
+}
+
+.link {
+    text-decoration: underline;
+    margin-left: 10px;
+    color: lightblue;
+    bottom: 10px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.buttonGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Adjust the number of columns as needed */
+    grid-template-rows: repeat(auto, auto);
+    /* Adjust the number of rows as needed */
+    gap: 10px;
+    /* Adjust the gap between buttons as needed */
+}
+
+.buttonGrid button {
+    width: 100%;
+}
+
+#overlayTurtle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Adjust the opacity as needed */
+    z-index: 9998;
+    /* Ensure it's above other content */
+    display: none;
+    /* Initially hidden */
+}
