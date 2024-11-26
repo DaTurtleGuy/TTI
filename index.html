@@ -2,234 +2,246 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="referrer" content="no-referrer">
-  <title>TTI - A privacy focused and secure front end for roleplaying. </title>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.3/dexie.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js,npm/crc-32@1.2,gh/syonfox/GPT-3-Encoder@c3c2e2533a15645d812b5e6fcb00b75b74718161/browser.min.js"></script>
-  <script type="module" src="script.js"></script>
-  <script src="libraries/dexie.js"></script>
-  <script src="libraries/marked.js"></script>
-  <script src="libraries/DOMPurify.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
+    <title>TTI - A privacy focused and secure front end for roleplaying. </title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.3/dexie.min.js"></script> -->
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js,npm/crc-32@1.2,gh/syonfox/GPT-3-Encoder@c3c2e2533a15645d812b5e6fcb00b75b74718161/browser.min.js"></script>
+    <script type="module" src="script.js"></script>
+    <script src="libraries/dexie.js"></script>
+    <script src="libraries/marked.js"></script>
+    <script src="libraries/DOMPurify.js"></script>
+    <script src="libraries/Jquery.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 
 </head>
 
 <body>
 
-  <div id="topNotification" style="position:fixed; top:1rem; left:0; right:0; z-index:1000; display:none;">
-    <div id="topNotificationContent"
-      style="margin:0 auto; max-width:350px; background:var(--notification-bg-color); color:white; text-align: center; padding: 0.5rem; border-radius: var(--border-radius);">
+    <div id="topNotification" style="position:fixed; top:1rem; left:0; right:0; z-index:1000; display:none;">
+        <div id="topNotificationContent"
+            style="margin:0 auto; max-width:350px; background:var(--notification-bg-color); color:white; text-align: center; padding: 0.5rem; border-radius: var(--border-radius);">
+        </div>
     </div>
-  </div>
 
-  <div id="main" style="display:flex; position:fixed; top:0; right:0; left:0; bottom:0;">
-    <div id="leftColumn" style="display:flex; flex-direction:column; width:255px; min-width:255px; padding:0.5rem; ">
-      <div style="display:flex;">
-        <button id="newThreadButton" style="width:100%; cursor:pointer; min-height:2rem;">💬 New chat</button>
-        <button id="closeLeftColumnButton"
-          style="cursor:pointer; min-height:2rem; margin-left: 0.5rem; min-width: 2rem;">
-          <img src="https://ttalesinteractive.com/graphics/larrow.png" width="25" height="25" alt="Menu">
-        </button>
-      </div>
-      <div id="threadSearchCtn" style="display:flex; width:100%; margin-top:0.5rem;">
-        <input id="threadSearchInput" style="height: 100%; flex-grow: 1; min-width: 0; padding-left: 0.5rem;"
-          type="text" placeholder="search threads...">
-        <button id="threadSearchButton" style="cursor:pointer;min-height: 2rem;min-width: 2rem;margin-left: 0.5rem;">
-          <img src="https://ttalesinteractive.com/graphics/mg.png" width="25" height="25" alt="Thread Search">
-        </button>
-      </div>
-      <!-- <div id="threadFolderNavigationBar" style="display:flex; width:100%; margin-top:0.5rem;">
+    <div id="main" style="display:flex; position:fixed; top:0; right:0; left:0; bottom:0;">
+        <div id="leftColumn"
+            style="display:flex; flex-direction:column; width:255px; min-width:255px; padding:0.5rem; ">
+            <div style="display:flex;">
+                <button id="newThreadButton" style="width:100%; cursor:pointer; min-height:2rem;">💬 New chat</button>
+                <button id="closeLeftColumnButton"
+                    style="cursor:pointer; min-height:2rem; margin-left: 0.5rem; min-width: 2rem;">
+                    <img src="https://ttalesinteractive.com/graphics/larrow.png" width="25" height="25" alt="Menu">
+                </button>
+            </div>
+            <div id="threadSearchCtn" style="display:flex; width:100%; margin-top:0.5rem;">
+                <input id="threadSearchInput" style="height: 100%; flex-grow: 1; min-width: 0; padding-left: 0.5rem;"
+                    type="text" placeholder="search threads...">
+                <button id="threadSearchButton"
+                    style="cursor:pointer;min-height: 2rem;min-width: 2rem;margin-left: 0.5rem;">
+                    <img src="https://ttalesinteractive.com/graphics/mg.png" width="25" height="25" alt="Thread Search">
+                </button>
+            </div>
+            <!-- <div id="threadFolderNavigationBar" style="display:flex; width:100%; margin-top:0.5rem;">
           <button id="threadFolderBackButton" style="cursor:pointer;min-height: 2rem;min-width: 2rem;margin-left: 0.5rem;">🔙</button>
         </div> -->
-      <!-- <div id="chatThreadFolders" data-current-folder-path=""></div> -->
-      <div id="chatThreads" data-current-folder-path=""></div>
-      <div id="appOptions">
-        <button id="RightPanelToggle"
-          title="Click this button to reveal/hide the prompt screen, custom code, and game stats."
-          onclick="toggleNewsPanel()"> News</button>
-          <button id="RightPanelToggle"
-          title="Click this button to reveal/hide the prompt screen, custom code, and game stats."
-          onclick="toggleOptionsPanel()">Prompts</button>
-        <div style="display:flex;">
-          
+            <!-- <div id="chatThreadFolders" data-current-folder-path=""></div> -->
+            <div id="chatThreads" data-current-folder-path=""></div>
+            <div id="appOptions">
+                <div style="display: flex; gap: 5px;">
+                    <button class="RightPanelToggle"
+                    title="Click this button to reveal/hide the prompt screen, custom code, and game stats."
+                    onclick="toggleNewsPanel()"> News</button>
+                <button class="RightPanelToggle"
+                    title="Click this button to reveal/hide the prompt screen, custom code, and game stats."
+                    onclick="toggleOptionsPanel()">Prompts</button>
+                </div>
+                <div style="display:flex;">
 
-          <button id="settingsButton" class="appOptionButton" style="position:relative;">
-            <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-              <img src="https://ttalesinteractive.com/graphics/key.png" width="25" height="25" alt="API Key Setting"
-                style="margin-right: 5px;">
-              API key & user settings
+
+                    <button id="settingsButton" class="appOptionButton" style="position:relative;">
+                        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://ttalesinteractive.com/graphics/key.png" width="25" height="25"
+                                alt="API Key Setting" style="margin-right: 5px;">
+                            API key & user settings
+                        </div>
+                    </button>
+
+
+
+                    <!-- <button id="statsButton" class="appOptionButton" style="margin-left: 0.5rem; width: 2rem;">📊</button> -->
+                </div>
+                <div style="display: flex;">
+                    <button id="clearDataButton" class="appOptionButton" style="width: 4rem;">
+                        <img src="https://ttalesinteractive.com/graphics/bin.png" width="25" height="25"
+                            alt="Clear Data">
+                    </button>
+
+                    <button id="exportDataButton" class="appOptionButton"
+                        style="position:relative; margin-left: 0.5rem; margin-right: 0.5rem;">
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <img src="https://ttalesinteractive.com/graphics/export.png" width="25" height="25"
+                                alt="Export" style="margin-right: 5px;">
+                            export
+                        </div>
+                    </button>
+
+                    <button class="appOptionButton" style="position:relative;">
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <img src="https://ttalesinteractive.com/graphics/folder.png" width="25" height="25"
+                                alt="Import Folder" style="margin-right: 5px;">
+                            import
+                        </div>
+                        <input id="importDataFileInput"
+                            style="position:absolute; top:0; left:0; right:0; bottom:0; opacity:0; cursor:pointer;"
+                            type="file">
+                    </button>
+                </div>
+                <button onclick="window.open('https://ttalesinteractive.com/?page_id=1542')" class="appOptionButton"
+                    style="position:relative;">
+                    <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                        <img src="https://ttalesinteractive.com/graphics/qm.png" width="25" height="25"
+                            alt="About this project" style="margin-right: 5px;">
+                        About this project
+                    </div>
+                </button>
+
             </div>
-          </button>
-
-
-
-          <!-- <button id="statsButton" class="appOptionButton" style="margin-left: 0.5rem; width: 2rem;">📊</button> -->
         </div>
-        <div style="display: flex;">
-          <button id="clearDataButton" class="appOptionButton" style="width: 4rem;">
-            <img src="https://ttalesinteractive.com/graphics/bin.png" width="25" height="25" alt="Clear Data">
-          </button>
 
-          <button id="exportDataButton" class="appOptionButton"
-            style="position:relative; margin-left: 0.5rem; margin-right: 0.5rem;">
-            <div style="position: relative; display: flex; align-items: center;">
-              <img src="https://ttalesinteractive.com/graphics/export.png" width="25" height="25" alt="Export"
-                style="margin-right: 5px;">
-              export
+        <div id="middleColumn"
+            style="flex-grow:1; display:flex; flex-direction:column; position:relative; overflow:hidden; min-width:200px; z-index:1;">
+            <div id="middleColumnShadowOverlay"
+                style="display:none; position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5); z-index:20;">
             </div>
-          </button>
+            <div id="characterSelection" class="middleColumnScreen" style="flex-grow:1; display:none; overflow: auto;">
+                <button id="characterSelectionOpenLeftColumnButton" class="openLeftColumnButton"
+                    style="background: var(--button-bg); border-radius: var(--border-radius); border: 1px solid var(--button-border-color); padding: 0.25rem; width: 2rem; min-height: 2rem; margin-right: 0.5rem; position: absolute; top: 0.5rem; left: 0.5rem;">
+                    <img src="https://ttalesinteractive.com/graphics/larrow.png" width="25" height="25"
+                        alt="Left Arrow">
+                </button>
+                <div>
+                    <h2 style="text-align:center;margin-bottom: 0.5rem;">Your Characters</h2>
+                    <div style="margin-bottom: 0.5rem;display: flex;justify-content: center;">
+                        <button id="newCharacterButton" style="padding: 0.25rem;">🆕 New Character</button>
+                        <button id="addCharacterButton" onclick="toggleFloatingWindow()" style="margin-left: 10px;">Add
+                            Character</button>
 
-          <button class="appOptionButton" style="position:relative;">
-            <div style="position: relative; display: flex; align-items: center;">
-              <img src="https://ttalesinteractive.com/graphics/folder.png" width="25" height="25" alt="Import Folder"
-                style="margin-right: 5px;">
-              import
+
+                    </div>
+                </div>
+                <div id="characterFoldersList" data-current-folder-path=""></div>
+                <div id="characterList"></div>
+                <div>
+                    <h2 style="text-align:center; margin-top:4rem;">Chapter One</h2>
+                </div>
+                <div id="starterCharacterList"></div>
+                <div>
+                    <h2 style="text-align:center; margin-top:4rem;">Chapter Two</h2>
+                </div>
+                <div id="secondCharacterList"></div>
+                <div>
+                    <h2 style="text-align:center; margin-top:4rem;">Other Bots</h2>
+                </div>
+                <div id="otherCharacterList"></div>
+                <br><br>
             </div>
-            <input id="importDataFileInput"
-              style="position:absolute; top:0; left:0; right:0; bottom:0; opacity:0; cursor:pointer;" type="file">
-          </button>
-        </div>
-        <button onclick="window.open('https://ttalesinteractive.com/?page_id=1542')" class="appOptionButton"
-          style="position:relative;">
-          <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-            <img src="https://ttalesinteractive.com/graphics/qm.png" width="25" height="25" alt="About this project"
-              style="margin-right: 5px;">
-            About this project
-          </div>
-        </button>
-
-      </div>
-    </div>
-
-    <div id="middleColumn"
-      style="flex-grow:1; display:flex; flex-direction:column; position:relative; overflow:hidden; min-width:200px; z-index:1;">
-      <div id="middleColumnShadowOverlay"
-        style="display:none; position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5); z-index:20;">
-      </div>
-      <div id="characterSelection" class="middleColumnScreen" style="flex-grow:1; display:none; overflow: auto;">
-        <button id="characterSelectionOpenLeftColumnButton" class="openLeftColumnButton"
-          style="background: var(--button-bg); border-radius: var(--border-radius); border: 1px solid var(--button-border-color); padding: 0.25rem; width: 2rem; min-height: 2rem; margin-right: 0.5rem; position: absolute; top: 0.5rem; left: 0.5rem;">
-          <img src="https://ttalesinteractive.com/graphics/larrow.png" width="25" height="25" alt="Left Arrow">
-        </button>
-        <div>
-          <h2 style="text-align:center;margin-bottom: 0.5rem;">Your Characters</h2>
-          <div style="margin-bottom: 0.5rem;display: flex;justify-content: center;">
-            <button id="newCharacterButton" style="padding: 0.25rem;">🆕 New Character</button>
-            <button id="addCharacterButton" onclick="toggleFloatingWindow()" style="margin-left: 10px;">Add Character</button>
-
-
-          </div>
-        </div>
-        <div id="characterFoldersList" data-current-folder-path=""></div>
-        <div id="characterList"></div>
-        <div>
-          <h2 style="text-align:center; margin-top:4rem;">Chapter One</h2>
-        </div>
-        <div id="starterCharacterList"></div>
-        <div>
-          <h2 style="text-align:center; margin-top:4rem;">Chapter Two</h2>
-        </div>
-        <div id="secondCharacterList"></div>
-        <div>
-          <h2 style="text-align:center; margin-top:4rem;">Other Bots</h2>
-        </div>
-        <div id="otherCharacterList"></div>
-        <br><br>
-      </div>
-      <div id="chatInterface" class="middleColumnScreen"
-        style="display:flex; flex-grow:1; flex-direction:column; height:100%; position:relative;">
-        <div id="customCodeChatInterfaceWrapper" style="display:none;"></div>
-        <div id="builtInChatInterfaceWrapper">
-          <div id="messageFeedHeaderBar"
-            style="display: flex; position:absolute;height: 2rem;right: 0;left: 0;margin: 0.5rem; z-index:30;">
-            <button id="messageFeedOpenLeftColumnButton" class="openLeftColumnButton"
-              style="display:none; background: var(--button-bg); border-radius: var(--border-radius); border: 1px solid var(--button-border-color); padding: 0.25rem; min-width: 2rem; height: 100%; margin-right:0.5rem;">
-              <img src="https://ttalesinteractive.com/graphics/rarrow.png" width="25" height="25" alt="Right Arrow">
-            </button>
-            <div
-              style="background: var(--button-bg); display:flex; height: 100%; border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">
-              <div style="display: flex;align-items: center;font-size:var(--button-font-size);margin-right: 0.25rem;">
-                model:</div>
-              <select id="threadModelSelector" style="max-width:130px;"></select>
-            </div>
-            <!-- <div id="threadSettingsButton" style="margin-left:0.5rem; cursor:pointer;   background: var(--button-bg); display:flex; height: 100%; border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">
+            <div id="chatInterface" class="middleColumnScreen"
+                style="display:flex; flex-grow:1; flex-direction:column; height:100%; position:relative;">
+                <div id="customCodeChatInterfaceWrapper" style="display:none;"></div>
+                <div id="builtInChatInterfaceWrapper">
+                    <div id="messageFeedHeaderBar"
+                        style="display: flex; position:absolute;height: 2rem;right: 0;left: 0;margin: 0.5rem; z-index:30;">
+                        <button id="messageFeedOpenLeftColumnButton" class="openLeftColumnButton"
+                            style="display:none; background: var(--button-bg); border-radius: var(--border-radius); border: 1px solid var(--button-border-color); padding: 0.25rem; min-width: 2rem; height: 100%; margin-right:0.5rem;">
+                            <img src="https://ttalesinteractive.com/graphics/rarrow.png" width="25" height="25"
+                                alt="Right Arrow">
+                        </button>
+                        <div
+                            style="background: var(--button-bg); display:flex; height: 100%; border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">
+                            <div
+                                style="display: flex;align-items: center;font-size:var(--button-font-size);margin-right: 0.25rem;">
+                                model:</div>
+                            <select id="threadModelSelector" style="max-width:130px;"></select>
+                        </div>
+                        <!-- <div id="threadSettingsButton" style="margin-left:0.5rem; cursor:pointer;   background: var(--button-bg); display:flex; height: 100%; border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">
                 <div style="display: flex;align-items: center;justify-content:center;font-size:var(--button-font-size);min-width:1.5rem;">⚙️</div>
               </div> -->
-          </div>
-          <div id="chatBackgroundCtn"
-            style="pointer-events:none; position:absolute; top:0; left:0; right:0; bottom:0; z-index:-10;"></div>
-          <div id="noMessagesNotice" style="display:none; text-align:center; padding:1rem; margin-top:4rem;">Type a
-            message to begin the chat.</div>
-          <div id="messageFeed" style="flex-grow:1; overflow-y:auto;"></div>
-          <div id="statusNotifier"
-            style="text-align: center; display: none; height: 0; position: relative; top: -0.4rem; display: flex; align-items: center; justify-content: center;">
-          </div>
-          <div id="inputWrapper"
-            style="display:flex; padding:0.5rem; padding-left:0; padding-right:0; flex-direction:column;">
-            <!-- <div style="display:flex;margin-bottom: 0.25rem;">
+                    </div>
+                    <div id="chatBackgroundCtn"
+                        style="pointer-events:none; position:absolute; top:0; left:0; right:0; bottom:0; z-index:-10;">
+                    </div>
+                    <div id="noMessagesNotice" style="display:none; text-align:center; padding:1rem; margin-top:4rem;">
+                        Type a
+                        message to begin the chat.</div>
+                    <div id="messageFeed" style="flex-grow:1; overflow-y:auto;"></div>
+                    <div id="statusNotifier"
+                        style="text-align: center; display: none; height: 0; position: relative; top: -0.4rem; display: flex; align-items: center; justify-content: center;">
+                    </div>
+                    <div id="inputWrapper"
+                        style="display:flex; padding:0.5rem; padding-left:0; padding-right:0; flex-direction:column;">
+                        <!-- <div style="display:flex;margin-bottom: 0.25rem;">
                 <button id="editReminderMessageButton" style="font-size:0.7rem;">
   <img src="https://ttalesinteractive.com/graphics/pencil2.png" width="20" height="20" alt="Edit Reminder Message">
 </button>
               </div> -->
-            <div id="userMessagesSentHistoryCtn"></div>
-            <div id="shortcutButtonsCtn"></div>
-            <div style="display:flex;">
-              <textarea id="messageInput" style="flex-grow:1; min-height:4rem; font-size:100%;"
-                title="commands:&#10;/ai - prompt a reply from ai&#10;/ai &lt;instruction&gt; - prompt reply with instruction&#10;/ai @CharName#123 &lt;instruction&gt; - prompt reply with another character (ID=123)&#10;/user &lt;instruction&gt; - generate a user reply&#10;/sys &lt;message&gt; - reply as system&#10;/sum - open summary editor&#10;/mem - open memory editor&#10;/lore - open lore editor&#10;/lore &lt;text&gt; - add a lore entry&#10;/name &lt;name&gt; - set your name for this thread&#10;/avatar &lt;url&gt; - set your avatar image for this thread&#10;/import - add chat messages in bulk&#10;&#10;• You can add '/ai &lt;instruction&gt;' as the final line in your normal messages to instruct AI for its reply.&#10;• Double-click this text box to show input history"></textarea>
-              <div style="display:flex; flex-direction:column; margin-left:0.25rem;">
-                <button id="sendButton" style="min-width:80px; flex-grow:1;">send</button>
-                <div style="position:relative;">
-                  <div id="threadOptionsPopup"
-                    style="position:absolute; display:none; padding:0.5rem; background:var(--background); border-radius:var(--border-radius); width:max-content; right:0; bottom:0; border:1px solid var(--border-color);">
-                    <button id="addShortcutButton">✨ add shortcut</button>
-                    <!-- <button id="replyLoopButton">➰ reply loop</button> -->
-                  </div>
+                        <div id="userMessagesSentHistoryCtn"></div>
+                        <div id="shortcutButtonsCtn"></div>
+                        <div style="display:flex;">
+                            <textarea id="messageInput" style="flex-grow:1; min-height:4rem; font-size:100%;"
+                                title="commands:&#10;/ai - prompt a reply from ai&#10;/ai &lt;instruction&gt; - prompt reply with instruction&#10;/ai @CharName#123 &lt;instruction&gt; - prompt reply with another character (ID=123)&#10;/user &lt;instruction&gt; - generate a user reply&#10;/sys &lt;message&gt; - reply as system&#10;/sum - open summary editor&#10;/mem - open memory editor&#10;/lore - open lore editor&#10;/lore &lt;text&gt; - add a lore entry&#10;/name &lt;name&gt; - set your name for this thread&#10;/avatar &lt;url&gt; - set your avatar image for this thread&#10;/import - add chat messages in bulk&#10;&#10;• You can add '/ai &lt;instruction&gt;' as the final line in your normal messages to instruct AI for its reply.&#10;• Double-click this text box to show input history"></textarea>
+                            <div style="display:flex; flex-direction:column; margin-left:0.25rem;">
+                                <button id="sendButton" style="min-width:80px; flex-grow:1;">send</button>
+                                <div style="position:relative;">
+                                    <div id="threadOptionsPopup"
+                                        style="position:absolute; display:none; padding:0.5rem; background:var(--background); border-radius:var(--border-radius); width:max-content; right:0; bottom:0; border:1px solid var(--border-color);">
+                                        <button id="addShortcutButton">✨ add shortcut</button>
+                                        <!-- <button id="replyLoopButton">➰ reply loop</button> -->
+                                    </div>
+                                </div>
+                                <button id="threadOptionsButton"
+                                    style="min-width:80px; margin-top:0.25rem;">options</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button id="threadOptionsButton" style="min-width:80px; margin-top:0.25rem;">options</button>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
+
+        <div id="rightColumn" style="width:min-content;" data-visible="no">
+            <div id="customCodeColumn" style="width:min-content; display:none; height:100%;">
+                <div id="customCodeIframeHorizontalResizeBar"></div>
+                <div id="customCodeIframeCtn" style="height:100%; flex-grow:1;"></div>
+            </div>
+        </div>
     </div>
 
-    <div id="rightColumn" style="width:min-content;" data-visible="no">
-      <div id="customCodeColumn" style="width:min-content; display:none; height:100%;">
-        <div id="customCodeIframeHorizontalResizeBar"></div>
-        <div id="customCodeIframeCtn" style="height:100%; flex-grow:1;"></div>
-      </div>
+    <button id="toggleRightColumnButton"
+        style="position:fixed; top:0.5rem; right:0.5rem; min-height:2rem; min-width:2rem; display:none; align-items:center; justify-content:center; z-index:500;">⚛️</button>
+
+
+    <audio id="musicPlayer" style="display:none;"></audio>
+
+    <div id="floating-window">
+        <h1>Select a JSON or PNG file to be imported </h1>
+        <button id="cancel-btn" onclick="toggleFloatingWindow()">X</button>
+        <form id="fileForm" enctype="multipart/form-data">
+            <label for="file" class="custom-file-label">Choose File</label>
+            <input type="file" id="file" name="file" accept=".json, .png" required class="custom-file-input"
+                onchange="getAlternateGreetings()" />
+        </form>
+
+
+        <div id="alternateGreetings"></div>
     </div>
-  </div>
-
-  <button id="toggleRightColumnButton"
-    style="position:fixed; top:0.5rem; right:0.5rem; min-height:2rem; min-width:2rem; display:none; align-items:center; justify-content:center; z-index:500;">⚛️</button>
+    <div id="overlayTurtle"></div>
 
 
-  <audio id="musicPlayer" style="display:none;"></audio>
-
-  <div id="floating-window">
-    <h1>Select a JSON or PNG file to be imported </h1>
-    <button id="cancel-btn" onclick="toggleFloatingWindow()">X</button>
-    <form id="fileForm"
-    enctype="multipart/form-data">
-    <label for="file" class="custom-file-label">Choose File</label>
-    <input type="file" id="file" name="file" accept=".json, .png" required class="custom-file-input"
-      onchange="getAlternateGreetings()"/>
-  </form>
-    
-
-    <div id="alternateGreetings"></div>
-  </div>
-  <div id="overlayTurtle"></div>
-
-
-<div
-  id="options-panel"
-  style="
+    <div id="options-panel" style="
     display: block;
     width: 30%;
     height: 100%;
@@ -239,294 +251,283 @@
     overflow: auto; /* Added to match CSS */
     background-color: black; /* Added to match CSS */
     color: lightblue; /* Added to match CSS */
-  "
-  bis_skin_checked="1"
-  class="slide-in-animation"
->
+  " bis_skin_checked="1" class="slide-in-animation">
 
-  <button
-    class="button"
-    style="position: relative; left: 10px; top: 10px"
-    onclick="toggleOptionsPanel()"
-  >
-    X
-  </button>
-  <img
-    class="options-panel-background"
-    src="https://ttalesinteractive.com/graphics/pencil.png"
-  />
-  <div style="position: relative" bis_skin_checked="1"></div>
-  <div
-    style="position: relative; bottom: 0%; left: 0px; width: 100%"
-    bis_skin_checked="1"
-  >
-    <p
-      style="
+        <button class="button" style="position: relative; left: 10px; top: 10px" onclick="toggleOptionsPanel()">
+            X
+        </button>
+        <img class="options-panel-background" src="https://ttalesinteractive.com/graphics/pencil.png" />
+        <div style="position: relative" bis_skin_checked="1"></div>
+        <div style="position: relative; bottom: 0%; left: 0px; width: 100%" bis_skin_checked="1">
+            <p style="
         text-align: center;
         font-size: 16px;
         color: #45d4d1;
         font-weight: bold;
         text-decoration: underline;
-      "
-    >
-      !WARNING!
-    </p>
-    <p style="font-size: 14px; color: #45d4d1; margin-left: 10px">
-      By enabling any custom prompt you are acknowledging you are 18 years of
-      age or older.
-    </p>
-  </div>
-  <div class="buttonGrid">
-  <select
-    class="optionButton"
-    title="Select an option to change the narration mode. Everything is set to a default SFW mode unless otherwise clicked."
-    id="narrationDropdown"
-  >
-    <option value="default">Narration: SFW</option>
-    <option value="GPT4">SFW GPT4-preview</option>
-    <option value="NSFW">Narration: NSFW</option></select
-  ><button
-    class="optionButton"
-    title="Click this button to end the narration loop.
+      ">
+                !WARNING!
+            </p>
+            <p style="font-size: 14px; color: #45d4d1; margin-left: 10px">
+                By enabling any custom prompt you are acknowledging you are 18 years of
+                age or older.
+            </p>
+        </div>
+        <div class="buttonGrid">
+            <select class="optionButton"
+                title="Select an option to change the narration mode. Everything is set to a default SFW mode unless otherwise clicked."
+                id="narrationDropdown">
+                <option value="default">Narration: SFW</option>
+                <option value="GPT4">SFW GPT4-preview</option>
+                <option value="NSFW">Narration: NSFW</option>
+            </select><button class="optionButton" title="Click this button to end the narration loop.
 Bots may hyprfixate on narration, clicking this button will fix that in the NEXT post made by the AI.
 Be sure to click a SFW or NSFW option after a couple of posts to return to better quality once the loop is fixed."
-    id="dialogueFixButton"
-  >
-    Narration Loop Fix</button
-  ><button
-    class="optionButton"
-    title="Click this button to enable a prompt that will correct an issue where the AI and story become stale.
+                id="dialogueFixButton">
+                Narration Loop Fix</button><button class="optionButton" title="Click this button to enable a prompt that will correct an issue where the AI and story become stale.
 This will force the plot to move forward by making the AI think about the narration and suspense.
-This will employ on the next post and help foreshadow the next plot point."
-    id="actionFixButton"
-  >
-    No Action Fix-Enable</button
-  ><button
-    class="optionButton"
-    title="Click this button to enable TTS using your Elevenlabs API key."
-    id="labsButton"
-  >
-    Enable Elevenlabs</button
-  ><button class="optionButton" id="statsButton" title="This button will toggle stats on and off.">
-    Toggle Stats</button
-  ><button
-    class="optionButton"
-    title="Customize the text style for the AI and yourself."
-    id="textStyleButton"
-  >
-    Customize Text</button
-  ><button
-    class="optionButton"
-    title="This button will enable an AI to comment on your adventures."
-    id="commentatorCode"
-  >
-    Deploy Whiskers</button
-  ><button class="optionButton" onclick="showGameInfo()" id="showGameInfoBtn">Show Game Info</button
-  ><button class="optionButton" onclick="showEncyclopedia()" id="showEncyclopediaBtn">Show Encyclopedia</button
-  ><button
-    class="optionButton"
-    title="Click me to help the AI remember specific details about your current character."
-    id="userDetailButton"
-  >
-    {{user}} details</button
-  ><button class="optionButton" id="swapButton">
-    Swap to:
-  </button>
-  <select id="dropdown" class="optionButton">
-  </select>
-    <button
-    id="foresightCode"
-    title="This button will enable the AI to plan things out."
-  >
-    Enable Foresight
-  </button>
-</div>
-</div>
+This will employ on the next post and help foreshadow the next plot point." id="actionFixButton">
+                No Action Fix-Enable</button><button class="optionButton"
+                title="Click this button to enable TTS using your Elevenlabs API key." id="labsButton">
+                Enable Elevenlabs</button><button class="optionButton" id="statsButton"
+                title="This button will toggle stats on and off.">
+                Toggle Stats</button><button class="optionButton"
+                title="Customize the text style for the AI and yourself." id="textStyleButton">
+                Customize Text</button><button class="optionButton"
+                title="This button will enable an AI to comment on your adventures." id="commentatorCode">
+                Deploy Whiskers</button><button class="optionButton" onclick="showGameInfo()" id="showGameInfoBtn">Show
+                Game Info</button><button class="optionButton" onclick="showEncyclopedia()"
+                id="showEncyclopediaBtn">Show Encyclopedia</button><button class="optionButton"
+                title="Click me to help the AI remember specific details about your current character."
+                id="userDetailButton">
+                {{user}} details</button><button class="optionButton" id="swapButton">
+                Swap to:
+            </button>
+            <select id="dropdown" class="optionButton">
+            </select>
+            <button id="foresightCode" title="This button will enable the AI to plan things out.">
+                Enable Foresight
+            </button>
+        </div>
+    </div>
 
 
 
 
 
 
-  <div id="news-panel">
-      <button class="button" style="position: relative; left: 10px; top: 10px;" onclick="toggleNewsPanel()">X</button>
-  <img class="news-panel-background" src="https://ttalesinteractive.com/graphics/pencil.png"></img>
+    <div id="news-panel">
+        <button class="button" style="position: relative; left: 10px; top: 10px;" onclick="toggleNewsPanel()">X</button>
+        <img class="news-panel-background" src="https://ttalesinteractive.com/graphics/pencil.png"></img>
 
-  <h2 class="version">Welcome to Beta: 1.9.9</h2>
-  
-      <p class="EloComment">
-    Pinned Comment: New year, new problems: TTI needs your help! Enjoying the site? Consider
-    <a href="https://www.buymeacoffee.com/elodine" target="_blank" class="EloCommentLink">donating to our
-      BuyMeACoffee</a>
-    or
-    <a href="https://www.youtube.com/@elodinecodes" target="_blank" class="EloCommentLink">tuning into a
-      video or two.</a>
-    to help keep this site going.
-    <br>
-    - Elodine
-  </p>
-
-          <p class="EloComment">
-    30/5: We've continued dropping some new characters and bots over the course of October! Feel free to join us on YouTube or Discord to check out even more content.
-	<br>
-    - Elodine
-  </p>
-  
-          <p class="EloComment">
-    10/5: Another content jam drop has landed with 1.9.8! We're introducing two more functional bots at the bottom of the page. They include an coding assistant and a bot that replicates the COT or o-1 strawberry model from OpenAI.
-	<br>
-    - Elodine
-  </p>
+        <h2 class="version">Welcome to Beta: 1.9.9</h2>
 
         <p class="EloComment">
-    10/3: It's October! And that means the content jam has started with 1.9.7 introducing two new characters! We'll be pushing out a number of characters and QOL improvments over this month. We all hope you enjoy! <3
-	<br>
-    - Elodine
-  </p>
+            Pinned Comment: New year, new problems: TTI needs your help! Enjoying the site? Consider
+            <a href="https://www.buymeacoffee.com/elodine" target="_blank" class="EloCommentLink">donating to our
+                BuyMeACoffee</a>
+            or
+            <a href="https://www.youtube.com/@elodinecodes" target="_blank" class="EloCommentLink">tuning into a
+                video or two.</a>
+            to help keep this site going.
+            <br>
+            - Elodine
+        </p>
 
         <p class="EloComment">
-    9/24: 1.9.6 - Universal Patch has been implemented. Old alpha versions now utelize beta 1.9.6 code to help resolve edge case bugs that occured between old and new versions communicating. To resolve this, alpha versions have been updated. This does not change your chats, characters, keys, or or any aspect of your data. Thanks!
-	<br>
-    - Elodine
-  </p>
+            30/5: We've continued dropping some new characters and bots over the course of October! Feel free to join us
+            on YouTube or Discord to check out even more content.
+            <br>
+            - Elodine
+        </p>
 
         <p class="EloComment">
-    9/20: Right! SO! 1.9.4 was buggy, that's been fixed with 1.9.5 I am really sorry this didn't get out sooner! Model rights now flag properly and chatgpt-latest is now working!
-	<br>
-    - Elodine
-  </p>
-  
-        <p class="EloComment">
-    9/13: Well it's about darn time 1.9.4 got here. It's taken a bit of work to get o1-preview and o1-mini up and running alongside chatgpt-4o-latest! If you encounter any erorrs, make sure to report them on Discord so they can be addressed right away!
-	<br>
-    - Elodine
-  </p>
-  
-        <p class="EloComment">
-    8/6: Say hello to 1.9.3 and GPT4 Long Output! This model is expensive as all getout but it promises longer outputs. This is an alpha model not everyone has access to currently. I've changed the lore and summarization prompts in hopes of preserving the original language of the conversation, something our international users have been asking for. At the moment it is still translating to English, I'll continue to search for fixes. If you find any problems, I'm happy to help! 
-	<br>
-    - Elodine
-  </p>
+            10/5: Another content jam drop has landed with 1.9.8! We're introducing two more functional bots at the
+            bottom of the page. They include an coding assistant and a bot that replicates the COT or o-1 strawberry
+            model from OpenAI.
+            <br>
+            - Elodine
+        </p>
 
         <p class="EloComment">
-    7/18: Hey, hey! GPT4-o Mini has been added! And some small bug fixes have come with it. A recent bug has been solved regarding model context (thanks Jenz!) and some tooltips have been updated. See you guys in early Aug!
-	<br>
-	<br>
-    - Elodine
-  </p>
+            10/3: It's October! And that means the content jam has started with 1.9.7 introducing two new characters!
+            We'll be pushing out a number of characters and QOL improvments over this month. We all hope you enjoy! <3
+            <br>
+                - Elodine
+        </p>
 
         <p class="EloComment">
-    7/8: Great news everyone! We finally have different model options for handling memory and lore now. Yay! I've also gone ahead and cleaned up the connections for all GPT models. More updates are coming early Aug! If you run into any issues from this update or any other please remember to report them to me on discord!
-    <br>
-    - Elodine
-  </p>
-  
-  
-        <p class="EloComment">
-    5/14: GPt-o added and functioning in the model list. Costs are not 100% accurate with this model yet. GPT-instruct removed due to no longer being in service.
-    <br>
-    - Elodine
-  </p>
-  
-  <p class = "TurtleComment">
-          <p class="EloComment">
-		
-	4/23: Placeholder feature was pushed live. ECHO pseudocode prompts are being fine-tuned <a href="https://ttalesinteractive.com/?p=1950" target="_blank" class="EloCommentLink">here</a>. Updates have been made to token cost calculation. <br>
-    - Elodine & Turtle Guy
-  </p>
-  <p class ="TurtleComment">  
-    4/15: Added a new placeholder, PRESENTING THE {{word:}} PLACEHOLDER!!!!!!
-    <br>
-    Basically, this placeholder will choose the correct word based on the pronouns you've set up
-    <br>
-    For example, the placeholder {{word:run/runs}} will be replaced with the second word (runs) if the user pronouns are not he/him or she/her.
-    </p>
-  <p class ="TurtleComment">
-    3/24: Fixed some bugs on the add character feature, and added some new place holders, {{they}}, {{them}} and {{their}}. These Placeholders will be replaced with the pronouns you've set in the settings.
-    <br>    
-    These placeholders are not currently used in our characters, since that is up to <a class="EloComment">someone</a> to implement.
-	<a class="EloComment">(New characters will have this feature implemented. -Eli)</a>
-    <br>
-    - Turtle Guy
-    </p>
-  <p class ="TurtleComment">
-    3/21: Finnally managed to find a way to extract the character data from PNG images... so yippe, now you can import character cards from any other site.
-    <br>
-    Note that for it to import the character image too, you'll need to set the <a href="https://api.imgbb.com/" class="TurtleCommentLink">imgbb API key</a> in the settings.
-    <br>
-    - Turtle Guy
-    </p>
-        <p class="EloComment">
-		
-	3/7: Jess and Tarek (Nyar) character cards have been added to both TTI and cAI. More characters and a potential art overhaul will be coming soon as well as 'in development' tags for certain characters that may be subject to upcoming changes when first released. Anyways! See you guys soon!
-  <br>
-    - Elodine
-  </p>
-  
-      <p class="EloComment">
-	2/22: You're probably thinking things look just a little different. And you're right! Thanks to our new dev Turtle Guy we've got a much more responsive prompt screen and a new news tab where you can keep an eye on the latest in development. We've obviously moved the prompt button! It now sits just beneath your chat threads in bottom left of your screen. Thanks for checking in, we'll see you soon for a new update. <3
-    <br>
-    - Elodine
-  </p>
-  
-        <p class="EloComment">
-		
-	2/22: Turtle Guy's news panel and prompt screen fixes were blended with Bimble's code decompression for more reasonable development and some minor hotfixes to styling.
-  <br>
-    - Elodine
-  </p>
-  
-  <p class="TurtleComment">
-    2/08: Okay, so I got scolded for removing the buttons because apparently THEY ACTUALLY DID SOMETHING and we had to roll back... My bad lol.
-    <br>
-    Anyway, now it works properly (I hope)
-    <br>
-    - Turtle guy
-</p>
-  <p class="TurtleComment">
-    2/03: I deleted all the buttons that were above these texts before... In my defense they did nothing at all, I made this into a news page... I will eventually readd all those buttons in a separate overlay or window, I don't know...
-    <br>
-    Also added that my comments are green and Elo's are pink... why? CAUSE I CAN... 
-    <br>
-    Now I'm wondering if any of y'all were using this on mobile... HOW, like the site is as responsive as a 90s site... I promise I'm working on it. 
-    <br>
-    - Turtle guy
-</p>
-  <p class="TurtleComment">
-    2/02: So Idk what to write here, I'm not as good at this as Elodine, i have been indirectly contributing
-    to the project for a while, and now I'm officially part of it... Sup.
-    <br>
-    So changes in this version are, The prompts button as been moved with the rest of the buttons (Right
-    down corner).
-    <br>
-    The arrow to deploy the left panel now flips when it is closed (Blame my OCD).
-    <br>
-    The buttons now have a more smooth highlight animation.
-    <br>
-    - Turtle Guy
-  </p>
+            9/24: 1.9.6 - Universal Patch has been implemented. Old alpha versions now utelize beta 1.9.6 code to help
+            resolve edge case bugs that occured between old and new versions communicating. To resolve this, alpha
+            versions have been updated. This does not change your chats, characters, keys, or or any aspect of your
+            data. Thanks!
+            <br>
+            - Elodine
+        </p>
 
-  <p class="EloComment">
-    1/12: Lorebooks now work correctly. I went ahead and moved the proxy server that handles lorebooks over
-    to our
-    server after rewriting its code. Have fun!
-    <br>
-    - Elodine
-  </p>
+        <p class="EloComment">
+            9/20: Right! SO! 1.9.4 was buggy, that's been fixed with 1.9.5 I am really sorry this didn't get out sooner!
+            Model rights now flag properly and chatgpt-latest is now working!
+            <br>
+            - Elodine
+        </p>
 
-    <div style="font-size: 12px; bottom: 10px;" bis_skin_checked="1">
-                <a class="link"
-                    href="https://discord.gg/Tr8vvRUuCv" data-type="page" data-id="533">Discord &amp; Bug Reports</a>
-                <a class="link"
-                    href="https://ttalesinteractive.com/?page_id=1560" data-type="page">Support our Devs</a>
-                <a class="link"
-                    href="https://ttalesinteractive.com/?page_id=1550" data-type="page" data-id="197">Terms of
-                    Service</a>
-                <a class="link"
-                    href="https://ttalesinteractive.com/?page_id=1552" data-type="page" data-id="193">Privacy Policy</a>
-            </div>
+        <p class="EloComment">
+            9/13: Well it's about darn time 1.9.4 got here. It's taken a bit of work to get o1-preview and o1-mini up
+            and running alongside chatgpt-4o-latest! If you encounter any erorrs, make sure to report them on Discord so
+            they can be addressed right away!
+            <br>
+            - Elodine
+        </p>
 
-</div>
+        <p class="EloComment">
+            8/6: Say hello to 1.9.3 and GPT4 Long Output! This model is expensive as all getout but it promises longer
+            outputs. This is an alpha model not everyone has access to currently. I've changed the lore and
+            summarization prompts in hopes of preserving the original language of the conversation, something our
+            international users have been asking for. At the moment it is still translating to English, I'll continue to
+            search for fixes. If you find any problems, I'm happy to help!
+            <br>
+            - Elodine
+        </p>
+
+        <p class="EloComment">
+            7/18: Hey, hey! GPT4-o Mini has been added! And some small bug fixes have come with it. A recent bug has
+            been solved regarding model context (thanks Jenz!) and some tooltips have been updated. See you guys in
+            early Aug!
+            <br>
+            <br>
+            - Elodine
+        </p>
+
+        <p class="EloComment">
+            7/8: Great news everyone! We finally have different model options for handling memory and lore now. Yay!
+            I've also gone ahead and cleaned up the connections for all GPT models. More updates are coming early Aug!
+            If you run into any issues from this update or any other please remember to report them to me on discord!
+            <br>
+            - Elodine
+        </p>
+
+
+        <p class="EloComment">
+            5/14: GPt-o added and functioning in the model list. Costs are not 100% accurate with this model yet.
+            GPT-instruct removed due to no longer being in service.
+            <br>
+            - Elodine
+        </p>
+
+        <p class="TurtleComment">
+        <p class="EloComment">
+
+            4/23: Placeholder feature was pushed live. ECHO pseudocode prompts are being fine-tuned <a
+                href="https://ttalesinteractive.com/?p=1950" target="_blank" class="EloCommentLink">here</a>. Updates
+            have been made to token cost calculation. <br>
+            - Elodine & Turtle Guy
+        </p>
+        <p class="TurtleComment">
+            4/15: Added a new placeholder, PRESENTING THE {{word:}} PLACEHOLDER!!!!!!
+            <br>
+            Basically, this placeholder will choose the correct word based on the pronouns you've set up
+            <br>
+            For example, the placeholder {{word:run/runs}} will be replaced with the second word (runs) if the user
+            pronouns are not he/him or she/her.
+        </p>
+        <p class="TurtleComment">
+            3/24: Fixed some bugs on the add character feature, and added some new place holders, {{they}}, {{them}} and
+            {{their}}. These Placeholders will be replaced with the pronouns you've set in the settings.
+            <br>
+            These placeholders are not currently used in our characters, since that is up to <a
+                class="EloComment">someone</a> to implement.
+            <a class="EloComment">(New characters will have this feature implemented. -Eli)</a>
+            <br>
+            - Turtle Guy
+        </p>
+        <p class="TurtleComment">
+            3/21: Finnally managed to find a way to extract the character data from PNG images... so yippe, now you can
+            import character cards from any other site.
+            <br>
+            Note that for it to import the character image too, you'll need to set the <a href="https://api.imgbb.com/"
+                class="TurtleCommentLink">imgbb API key</a> in the settings.
+            <br>
+            - Turtle Guy
+        </p>
+        <p class="EloComment">
+
+            3/7: Jess and Tarek (Nyar) character cards have been added to both TTI and cAI. More characters and a
+            potential art overhaul will be coming soon as well as 'in development' tags for certain characters that may
+            be subject to upcoming changes when first released. Anyways! See you guys soon!
+            <br>
+            - Elodine
+        </p>
+
+        <p class="EloComment">
+            2/22: You're probably thinking things look just a little different. And you're right! Thanks to our new dev
+            Turtle Guy we've got a much more responsive prompt screen and a new news tab where you can keep an eye on
+            the latest in development. We've obviously moved the prompt button! It now sits just beneath your chat
+            threads in bottom left of your screen. Thanks for checking in, we'll see you soon for a new update. <3 <br>
+                - Elodine
+        </p>
+
+        <p class="EloComment">
+
+            2/22: Turtle Guy's news panel and prompt screen fixes were blended with Bimble's code decompression for more
+            reasonable development and some minor hotfixes to styling.
+            <br>
+            - Elodine
+        </p>
+
+        <p class="TurtleComment">
+            2/08: Okay, so I got scolded for removing the buttons because apparently THEY ACTUALLY DID SOMETHING and we
+            had to roll back... My bad lol.
+            <br>
+            Anyway, now it works properly (I hope)
+            <br>
+            - Turtle guy
+        </p>
+        <p class="TurtleComment">
+            2/03: I deleted all the buttons that were above these texts before... In my defense they did nothing at all,
+            I made this into a news page... I will eventually readd all those buttons in a separate overlay or window, I
+            don't know...
+            <br>
+            Also added that my comments are green and Elo's are pink... why? CAUSE I CAN...
+            <br>
+            Now I'm wondering if any of y'all were using this on mobile... HOW, like the site is as responsive as a 90s
+            site... I promise I'm working on it.
+            <br>
+            - Turtle guy
+        </p>
+        <p class="TurtleComment">
+            2/02: So Idk what to write here, I'm not as good at this as Elodine, i have been indirectly contributing
+            to the project for a while, and now I'm officially part of it... Sup.
+            <br>
+            So changes in this version are, The prompts button as been moved with the rest of the buttons (Right
+            down corner).
+            <br>
+            The arrow to deploy the left panel now flips when it is closed (Blame my OCD).
+            <br>
+            The buttons now have a more smooth highlight animation.
+            <br>
+            - Turtle Guy
+        </p>
+
+        <p class="EloComment">
+            1/12: Lorebooks now work correctly. I went ahead and moved the proxy server that handles lorebooks over
+            to our
+            server after rewriting its code. Have fun!
+            <br>
+            - Elodine
+        </p>
+
+        <div style="font-size: 12px; bottom: 10px;" bis_skin_checked="1">
+            <a class="link" href="https://discord.gg/Tr8vvRUuCv" data-type="page" data-id="533">Discord &amp; Bug
+                Reports</a>
+            <a class="link" href="https://ttalesinteractive.com/?page_id=1560" data-type="page">Support our Devs</a>
+            <a class="link" href="https://ttalesinteractive.com/?page_id=1550" data-type="page" data-id="197">Terms of
+                Service</a>
+            <a class="link" href="https://ttalesinteractive.com/?page_id=1552" data-type="page" data-id="193">Privacy
+                Policy</a>
+        </div>
+
+    </div>
 
 
 

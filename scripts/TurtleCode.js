@@ -60,6 +60,7 @@ function getAlternateGreetings() {
                     // Save the extracted character data
                     CharacterData = characterData;
                     displayGreetings(characterData);
+                    
                 } catch (error) {
                     console.error("Error parsing JSON file:", error);
                     showError("Error parsing JSON file. Please ensure the file is in the correct format.");
@@ -70,6 +71,7 @@ function getAlternateGreetings() {
             // Check if the uploaded file is a PNG image
             // Extract character data from the image
             isPng = true;
+            fileGlobal = file;
             extractCharacterData(file)
                 .then((characterData) => {
                     // Save the extracted character data
@@ -160,6 +162,44 @@ async function selectGreeting(index) {
     }
 }
 
+async function scaleImageToBase64(file) {
+    if (!file || !file.type.startsWith("image/")) {
+        throw new Error("Provided file is not an image");
+    }
+
+    const fileDataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("Failed to read file"));
+        reader.readAsDataURL(file);
+    });
+
+    const img = await new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error("Failed to load image"));
+        image.src = fileDataUrl;
+    });
+
+    const maxWidth = 300;
+    let { width, height } = img;
+
+    if (width > maxWidth) {
+        const scale = maxWidth / width;
+        width = maxWidth;
+        height = height * scale;
+    }
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.drawImage(img, 0, 0, width, height);
+
+    return canvas.toDataURL(file.type);
+}
+
 
 async function generate_url(characterData, greeting) {
     // Extracting relevant data from the JSON
@@ -167,27 +207,7 @@ async function generate_url(characterData, greeting) {
     const roleInstruction = characterData.data.description || "";
     let Avatar = '';
 
-    // Define a function to upload the image
-    // Define a function to upload the image
-    async function uploadImageAsync() {
-        try {
-            if (isPng) {
-                Avatar = await uploadImage(fileGlobal);
-                while (Avatar === "") {
-                    console.log("Waiting for image upload...");
-                    await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second before checking again
-                }
-            }
-        } catch (error) {
-            console.error('Error uploading image:', error);
-            // Handle the error here (e.g., log it or show a message to the user)
-            // If you want to continue execution even if this error occurs, you don't need to rethrow it
-        }
-    }
-
-
-    // Call the function to upload the image
-    await uploadImageAsync();
+    Avatar = await scaleImageToBase64(fileGlobal);
 
     let behavior = characterData.data.description || "";
     if (characterData.data.description && characterData.data.personality) {

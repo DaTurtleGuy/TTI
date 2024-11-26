@@ -823,3 +823,9 @@ body.isMobile #news-panel {
   z-index: 9998; /* Ensure it's above other content */
   display: none; /* Initially hidden */
 }
+
+
+.RightPanelToggle {
+    width: 50%;
+    height: 35px;
+}
