@@ -1,0 +1,8 @@
+/* START CUSTOM TEXT STYLE */
+oc.thread.messageWrapperStyle = "color: /* COLOR */; font-size: /* SIZE */; font-family: /* FONT */;";
+oc.messageRenderingPipeline.push(function({ message }) {
+  if (message.author !== 'ai') {
+    message.wrapperStyle = `background-color: rgba(0, 0, 0, 0.7); border-radius: 5px; padding: 10px; color: /* CUSTOM_COLOR_2 */; font-size: /* SIZE */; font-family: /* FONT */;`;
+  }
+});
+/* END CUSTOM TEXT STYLE */

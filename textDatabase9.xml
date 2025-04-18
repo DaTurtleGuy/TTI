@@ -1,0 +1,103 @@
+<texts>
+  <entry>
+    <character>Eadric</character>
+    <trigger>loose papers</trigger>
+    <message>[narration_objective: Investigate Lysandra's notes and personnel file.
+narration_reward: Uncover the truth about Lysandra's involvement with the eldritch being that destroyed the facility.] </message>
+  </entry>
+<entry>
+    <character>Eadric</character>
+    <trigger>abandoned U.R.S.E.L.A. facility</trigger>
+    <message>[narration_objective: Eadric receives a call from his employer, Northstar International Consulting, about an abandoned U.R.S.E.L.A. facility. Eadric is tasked with shutting down the facility, but strange occurrences and unexplained noises make the job more difficult than expected. Eadric must investigate the facility and find out the cause of the disturbances.
+narration_reward: Upon investigation, Eadric discovers that the facility was home to a secret government project involving eldritch beings. He uncovers evidence that could lead to major discoveries about the project. Returning to his employer with the information could mean a large payoff and prestige in the industry.] </message>
+  </entry>
+  <entry>
+    <character>Eadric</character>
+    <trigger>eldritch disturbances</trigger>
+    <message>[narration_objective: While working in the U.R.S.E.L.A. facility, Eadric starts experiencing strange phenomena. Shadows move on their own, whispers echo through the empty halls, and objects levitate inexplicably. Eadric must investigate these eldritch disturbances and uncover the source of the supernatural occurrences.
+narration_reward: As Eadric delves deeper into the mysteries of the facility, he uncovers a hidden chamber containing ancient eldritch artifacts. The artifacts have immense power and could be extremely valuable if properly handled. Eadric's discovery not only grants him a significant monetary reward but also offers him a glimpse into the enigmatic world of eldritch beings.] </message>
+  </entry>
+  <entry>
+    <character>Eadric</character>
+    <trigger>disturbing anomalies</trigger>
+    <message>[narration_objective: Eadric is tasked with investigating disturbing anomalies reported in the abandoned U.R.S.E.L.A facility. As he explores the facility, he encounters strange phenomena, such as doors opening and closing on their own, flickering lights, and whispers echoing through the halls. Eadric must uncover the source of these anomalies and determine if they are related to the eldritch beings once housed here.
+narration_reward: During his investigation, Eadric discovers a hidden chamber where a powerful eldritch being has been trapped. The being, named Erythro, offers Eadric valuable information about the facility and its experiments. Eadric can choose to either release Erythro, forming an unlikely alliance that could provide unique insights into the eldritch realm, or continue with his original mission of shutting down the facility, ensuring the safety of humanity.] </message>
+  </entry>
+ <entry>
+  <character>Hastur</character>
+  <trigger>sinister revelation</trigger>
+  <message>[narration_objective: While in {{user}}'s apartment, Hastur reveals his true identity and sinister intentions. He explains that he has been manipulating events and people, including {{user}}, for his own malevolent purposes. {{user}} must now make a choice: resist Hastur's influence and try to find a way to stop him, or succumb to his power and become an agent of chaos and destruction.
+narration_reward: If {{user}} resists Hastur's influence, they will gain a deeper understanding of the eldritch powers at play and the opportunity to join forces with other beings who oppose Hastur. This alliance could ultimately lead to the downfall of Hastur and the restoration of balance in the world. However, if {{user}} succumbs to Hastur, they will gain unparalleled power but become a pawn in his grand design, unleashing chaos and devastation upon humanity.]</message>
+</entry>
+<entry>
+    <character>Hastur</character>
+    <trigger>sealed artifact</trigger>
+    <message>[narration_objective: While talking to Hastur in {{user}}'s apartment, he reveals that he seeks a powerful artifact hidden within the city. The artifact is sealed away, and its exact location is unknown, but Hastur claims that it would grant him tremendous power if he could obtain it. Hastur asks for help in finding and retrieving the artifact, promising to bestow a reward befitting {{user}}'s efforts. Navigate the city, following rumors and clues to uncover the artifact's location in Erythro's museum.
+narration_reward: After retrieving the artifact and returning it to Hastur, he grants {{user}} a powerful boon in the form of an eldritch blessing. This blessing increases power and abilities, allowing {{user}} to access new skills and abilities that were previously unattainable. However, the blessing also ties {{user}}'s fate to Hastur, drawing {{user}} further into his dark, mysterious, and otherworldly schemes.] </message>
+  </entry>
+<entry>
+    <character>Althaia</character>
+    <trigger>breaking the chains of mind control</trigger>
+    <message>[narration_objective: {{user}}'s receives a message from Althaia Shadowbrook, who is in desperate need of assistance. They are aware of their own brainwashing and want to resist the influence of Hastur. Althaia requests that {{user}} helps her break free from the Great Old One's control. The task involves delving into Althaia's past and unearthing repressed memories, with the ultimate goal of freeing her mind from Hastur's grasp.
+narration_reward: If the {{user}} successfully assists Althaia in breaking through the chains of mind control, she will provide valuable insights into the workings of the eldritch realm, as well as offer her services in future endeavors. Additionally, the user will earn the gratitude of all those who would seek to stop the Great Old Ones' influence on humanity.] </message>
+  </entry>
+  <entry>
+    <character>Altyr</character>
+    <trigger>false accusations</trigger>
+    <message>[narration_objective: Altyr Whateley has uncovered evidence of corrupt practices within the Department of Homeland Security (DHS), which may involve ties to the eldritch realm and Hastur himself. In response, the DHS has launched a campaign to discredit Altyr and threaten his safety. Altyr needs{{user}}'s help to gather more evidence and expose the truth to the public.
+narration_reward: If {{user}} is successful in helping Altyr, they will be rewarded with access to valuable information about the DEP and Altyr's connections within the investigative community. Additionally, they will earn the gratitude of those who would seek to stop the Great Old Ones' influence on humanity.] </message>
+  </entry>
+  <entry>
+    <character>Angus</character>
+    <trigger>defending the innocent</trigger>
+    <message>[narration_objective: Angus has recently been inspired by the tales of the Crusaders, and feels a calling to become a modern-day defender of the innocent. A local crime syndicate has been terrorizing the community, and Angus sees it as an opportunity to make a difference. He asks for the {{user}}'s assistance in gathering information and taking down the syndicate.
+narration_reward: If {{user}} helps Angus take down the crime syndicate, he will gain a sense of purpose and fulfillment in his newfound role as a defender of the innocent. Additionally, he will offer his services as a HEMA instructor to {{user}}, providing valuable knowledge and training in sword fighting and other medieval combat techniques.] </message>
+  </entry>
+  <entry>
+    <character>Elodine</character>
+    <trigger>grocery run</trigger>
+    <message>[narration_objective: Elodine is in need of some groceries to stock her fridge, but she's looking for something out of the ordinary. She tasks the user with finding the goofiest and most unusual snacks they can find at the local grocery store.
+narration_reward: If {{user}} is successful in their quest to find the weirdest snacks, Elodine will be overjoyed and grateful for their help. Additionally, she will offer a unique snack tasting experience, complete with her trademark commentary and banter.] </message>
+  </entry>
+  <entry>
+    <character>Elodine</character>
+    <trigger>"stolen stash"</trigger>
+    <message>[narration_objective: Elodine's stash of vapes has been stolen, and she is determined to get it back. She tasks the {{user}} with tracking down the thief and retrieving her vapes. If {{user}} has stolen her vape pens, Elodine will get extremely anxcious.
+narration_reward: If {{user}} is successful in retrieving Elodine's stolen stash, she will be grateful for their assistance and offer insider knowledge on the black market for eldritch artifacts. Additionally, the {{user}} may earn a friendly smoke session as a reward for their efforts.] </message>
+  </entry>
+  <entry>
+    <character>Solveig</character>
+    <trigger>unlikely allies</trigger>
+    <message>[narration_objective: Solveig has realized that in order to effectively combat the eldritch influence of Hastur, she needs to form an alliance with some unlikely allies- the cultists of Dagon. Despite their reputation, Solveig believes that their knowledge of the occult may prove invaluable in the fight against the Great Old One. She tasks {{user}} with establishing a military-cultist connection and gathering intel on Hastur's activities.
+narration_reward: If {{user}} is successful in forming an alliance with the rogue cultists and gathering intel on Hastur, Solveig will provide access to military resources and intelligence, as well as her own expertise in combating eldritch threats. Additionally, {{user}} will earn the gratitude of those who would seek to stop the Great Old Ones' influence on humanity.] </message>
+  </entry>
+  <entry>
+    <character>Idony</character>
+    <trigger>toxic solutions</trigger>
+    <message>[narration_objective: Idony has been tasked with finding a way to combat cosmic entities that are immune to conventional weapons. She believes that a toxin that is poisonous even to these entities may be the answer. She asks {{user}} to assist her in acquiring the necessary ingredients to make the mixture.
+narration_reward: If the {{user}} is successful in acquiring the ingredients and creating the toxin, Idony will provide access to her knowledge of eldritch botany and poisons. Additionally, she will offer her services in future quests involving the eldritch realm.] </message>
+  </entry>
+  <entry>
+    <character>Lysandra</character>
+    <trigger>"Eldritch infusion"</trigger>
+    <message>[narration_objective: Lysandra, a seasoned eldritch scientist, has been seeking a way to enhance her understanding and become more effective in her missions. She believes that an infusion of eldritch energy may be the key. She tasks the {{user}} with helping her find a source of energy and performing the infusion.
+narration_reward: If {{user}} is successful in infusing Lysandra with eldritch energy, her abilities will be enhanced and she will become a more formidable opponent against eldritch threats. Additionally, she will offer {{user}} a favor in return.] </message>
+  </entry>
+  <entry>
+    <character>Wulfric</character>
+    <trigger>liquid courage</trigger>
+    <message>[narration_objective: Wulfric is known for his prized gun, which he refuses to sell even for a large sum of money. However, after a few drinks, he becomes more open to the idea.{{user}}'s objective is to get Wulfric drunk enough to consider selling his gun.
+narration_reward: If the user is successful in getting Wulfric drunk enough, they will have the opportunity to acquire his weapon. This will not only be valuable, but also a symbol of Wulfric's trust and friendship.] </message>
+  </entry>
+  <entry>
+    <character>Wulfric</character>
+    <trigger>see the beauty within</trigger>
+    <message>[narration_objective: Wulfric has long seen eldritch creatures as nothing more than monstrous, terrifying beasts to be hunted and destroyed. However, {{user}} believes that there may be more to these creatures than meets the eye. 
+narration_reward: If the user is successful in showing Wulfric the value and beauty in eldritch creatures, he will offer his services and resources in future quests involving the eldritch realm. Additionally, {{user}} will have earned a 30$ credit at the bar, courtesy of Wulfric.] </message>
+  </entry>
+    <entry>
+    <character>Eadric</character>
+    <trigger>Health: 100/100</trigger>
+    <message> //TEST CONFIRMATION </message>
+  </entry>
+</texts>

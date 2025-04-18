@@ -1,0 +1,444 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
+    <title>TTI - A privacy focused and secure front-end for roleplaying. </title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js,npm/crc-32@1.2,gh/syonfox/GPT-3-Encoder@c3c2e2533a15645d812b5e6fcb00b75b74718161/browser.min.js"></script>
+
+    <script src="Turtle/dexie.js"></script>
+    <script src="Turtle/dexie-export-import.js"></script>
+    <script src="Turtle/marked.js"></script>
+    <script src="Turtle/purify.js"></script>
+
+    <script src="Turtle/EloCode.js"></script>
+
+    <link rel="stylesheet" href="Turtle/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div id="topNotification" style="position:fixed; top:1rem; left:0; right:0; z-index:1000; display:none;">
+        <div id="topNotificationContent"
+            style="margin:0 auto; max-width:350px; background:var(--notification-bg-color); color:white; text-align: center; padding: 0.5rem; border-radius: var(--border-radius);">
+        </div>
+    </div>
+
+    <div id="main" style="display:flex; position:fixed; top:0; right:0; left:0; bottom:0;">
+        <div id="leftColumn"
+            style="display:flex; flex-direction:column; width:255px; min-width:255px; padding:0.5rem; ">
+            <div style="display:flex;">
+                <button id="newThreadButton" style="width:100%; cursor:pointer; min-height:2rem;">💬 New chat</button>
+                <button id="closeLeftColumnButton"
+                    style="cursor:pointer; min-height:2rem; margin-left: 0.5rem; min-width: 2rem;">
+                    <img src="https://ttalesinteractive.com/graphics/larrow.png" width="25" height="25" alt="Menu">
+                </button>
+            </div>
+            <div id="threadSearchCtn" style="display:flex; width:100%; margin-top:0.5rem;">
+                <input id="threadSearchInput" style="height: 100%; flex-grow: 1; min-width: 0; padding-left: 0.5rem;"
+                    type="text" placeholder="search threads...">
+                <button id="threadSearchButton"
+                    style="cursor:pointer;min-height: 2rem;min-width: 2rem;margin-left: 0.5rem;">
+                    <img src="https://ttalesinteractive.com/graphics/mg.png" width="25" height="25" alt="Thread Search">
+                </button>
+            </div>
+            <!-- <div id="threadFolderNavigationBar" style="display:flex; width:100%; margin-top:0.5rem;">
+          <button id="threadFolderBackButton" style="cursor:pointer;min-height: 2rem;min-width: 2rem;margin-left: 0.5rem;">🔙</button>
+        </div> -->
+            <!-- <div id="chatThreadFolders" data-current-folder-path=""></div> -->
+            <div id="chatThreads" data-current-folder-path=""></div>
+            <div id="appOptions">
+                <button id="RightPanelToggle"
+                    title="Click this button to reveal/hide the prompt screen, custom code, and game stats."
+                    onclick="toggleNewsPanel()"> News</button>
+                <button id="RightPanelToggle"
+                    title="Click this button to reveal/hide the prompt screen, custom code, and game stats."
+                    onclick="toggleOptionsPanel()">Prompts</button>
+                <div style="display:flex;">
+
+
+                    <button id="settingsButton" class="appOptionButton" style="position:relative;">
+                        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://ttalesinteractive.com/graphics/key.png" width="25" height="25"
+                                alt="API Key Setting" style="margin-right: 5px;">
+                            API key & user settings
+                        </div>
+                    </button>
+
+
+
+                    <!-- <button id="statsButton" class="appOptionButton" style="margin-left: 0.5rem; width: 2rem;">📊</button> -->
+                </div>
+                <div style="display: flex;">
+                    <button id="clearDataButton" class="appOptionButton" style="width: 4rem;">
+                        <img src="https://ttalesinteractive.com/graphics/bin.png" width="25" height="25"
+                            alt="Clear Data">
+                    </button>
+
+                    <button id="exportDataButton" class="appOptionButton"
+                        style="position:relative; margin-left: 0.5rem; margin-right: 0.5rem;">
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <img src="https://ttalesinteractive.com/graphics/export.png" width="25" height="25"
+                                alt="Export" style="margin-right: 5px;">
+                            export
+                        </div>
+                    </button>
+
+                    <button class="appOptionButton" style="position:relative;">
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <img src="https://ttalesinteractive.com/graphics/folder.png" width="25" height="25"
+                                alt="Import Folder" style="margin-right: 5px;">
+                            import
+                        </div>
+                        <input id="importDataFileInput"
+                            style="position:absolute; top:0; left:0; right:0; bottom:0; opacity:0; cursor:pointer;"
+                            type="file">
+                    </button>
+                </div>
+                <button onclick="window.open('https://ttalesinteractive.com/?page_id=1542')" class="appOptionButton"
+                    style="position:relative;">
+                    <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                        <img src="https://ttalesinteractive.com/graphics/qm.png" width="25" height="25"
+                            alt="About this project" style="margin-right: 5px;">
+                        About this project
+                    </div>
+                </button>
+
+            </div>
+        </div>
+
+        <div id="middleColumn"
+            style="flex-grow:1; display:flex; flex-direction:column; position:relative; overflow:hidden; min-width:200px; z-index:1;">
+            <div id="middleColumnShadowOverlay"
+                style="display:none; position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5); z-index:20;">
+            </div>
+            <div id="characterSelection" class="middleColumnScreen" style="flex-grow:1; display:none; overflow: auto;">
+                <button id="characterSelectionOpenLeftColumnButton" class="openLeftColumnButton"
+                    style="background: var(--button-bg); border-radius: var(--border-radius); border: 1px solid var(--button-border-color); padding: 0.25rem; width: 2rem; min-height: 2rem; margin-right: 0.5rem; position: absolute; top: 0.5rem; left: 0.5rem;">
+                    <img src="https://ttalesinteractive.com/graphics/larrow.png" width="25" height="25"
+                        alt="Left Arrow">
+                </button>
+                <div>
+                    <h2 style="text-align:center;margin-bottom: 0.5rem;">Your Characters</h2>
+                    <div style="margin-bottom: 0.5rem;display: flex;justify-content: center;">
+                        <button id="newCharacterButton" style="padding: 0.25rem;">🆕 New Character</button>
+                        <button id="addCharacterButton" onclick="toggleFloatingWindow()" style="margin-left: 10px;">Add
+                            Character</button>
+
+
+                    </div>
+                </div>
+                <div id="characterFoldersList" data-current-folder-path=""></div>
+                <div id="characterList"></div>
+                <div>
+                    <h2 style="text-align:center; margin-top:4rem;">Chapter One</h2>
+                </div>
+                <div id="starterCharacterList"></div>
+                <div>
+                    <h2 style="text-align:center; margin-top:4rem;">Chapter Two</h2>
+                </div>
+                <div id="secondCharacterList"></div>
+                <div>
+                    <h2 style="text-align:center; margin-top:4rem;">Other Bots</h2>
+                </div>
+                <div id="otherCharacterList"></div>
+                <br><br>
+            </div>
+            <div id="chatInterface" class="middleColumnScreen"
+                style="display:flex; flex-grow:1; flex-direction:column; height:100%; position:relative;">
+                <div id="customCodeChatInterfaceWrapper" style="display:none;"></div>
+                <div id="builtInChatInterfaceWrapper">
+                    <div id="messageFeedHeaderBar"
+                        style="display: flex; position:absolute;height: 2rem;right: 0;left: 0;margin: 0.5rem; z-index:30;">
+                        <button id="messageFeedOpenLeftColumnButton" class="openLeftColumnButton"
+                            style="display:none; background: var(--button-bg); border-radius: var(--border-radius); border: 1px solid var(--button-border-color); padding: 0.25rem; min-width: 2rem; height: 100%; margin-right:0.5rem;">
+                            <img src="https://ttalesinteractive.com/graphics/rarrow.png" width="25" height="25"
+                                alt="Right Arrow">
+                        </button>
+                        <div
+                            style="background: var(--button-bg); display:flex; height: 100%; border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">
+                            <div
+                                style="display: flex;align-items: center;font-size:var(--button-font-size);margin-right: 0.25rem;">
+                                model:</div>
+                            <select id="threadModelSelector" style="max-width:130px;"></select>
+                        </div>
+                        <!-- <div id="threadSettingsButton" style="margin-left:0.5rem; cursor:pointer;   background: var(--button-bg); display:flex; height: 100%; border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">
+                <div style="display: flex;align-items: center;justify-content:center;font-size:var(--button-font-size);min-width:1.5rem;">⚙️</div>
+              </div> -->
+                    </div>
+                    <div id="chatBackgroundCtn"
+                        style="pointer-events:none; position:absolute; top:0; left:0; right:0; bottom:0; z-index:-10;">
+                    </div>
+                    <div id="noMessagesNotice" style="display:none; text-align:center; padding:1rem; margin-top:4rem;">
+                        Type a
+                        message to begin the chat.</div>
+                    <div id="messageFeed" style="flex-grow:1; overflow-y:auto;"></div>
+                    <div id="statusNotifier"
+                        style="text-align: center; display: none; height: 0; position: relative; top: -0.4rem; display: flex; align-items: center; justify-content: center;">
+                    </div>
+                    <div id="inputWrapper"
+                        style="display:flex; padding:0.5rem; padding-left:0; padding-right:0; flex-direction:column;">
+                        <!-- <div style="display:flex;margin-bottom: 0.25rem;">
+                <button id="editReminderMessageButton" style="font-size:0.7rem;">
+  <img src="https://ttalesinteractive.com/graphics/pencil2.png" width="20" height="20" alt="Edit Reminder Message">
+</button>
+              </div> -->
+                        <div id="userMessagesSentHistoryCtn"></div>
+                        <div id="shortcutButtonsCtn"></div>
+                        <div style="display:flex;">
+                            <textarea id="messageInput" style="flex-grow:1; min-height:4rem; font-size:100%;"
+                                title="commands:&#10;/ai - prompt a reply from ai&#10;/ai &lt;instruction&gt; - prompt reply with instruction&#10;/ai @CharName#123 &lt;instruction&gt; - prompt reply with another character (ID=123)&#10;/user &lt;instruction&gt; - generate a user reply&#10;/sys &lt;message&gt; - reply as system&#10;/sum - open summary editor&#10;/mem - open memory editor&#10;/lore - open lore editor&#10;/lore &lt;text&gt; - add a lore entry&#10;/name &lt;name&gt; - set your name for this thread&#10;/avatar &lt;url&gt; - set your avatar image for this thread&#10;/import - add chat messages in bulk&#10;&#10;• You can add '/ai &lt;instruction&gt;' as the final line in your normal messages to instruct AI for its reply.&#10;• Double-click this text box to show input history"></textarea>
+                            <div style="display:flex; flex-direction:column; margin-left:0.25rem;">
+                                <button id="sendButton" style="min-width:80px; flex-grow:1;">send</button>
+                                <div style="position:relative;">
+                                    <div id="threadOptionsPopup"
+                                        style="position:absolute; display:none; padding:0.5rem; background:var(--background); border-radius:var(--border-radius); width:max-content; right:0; bottom:0; border:1px solid var(--border-color);">
+                                        <button id="addShortcutButton">✨ add shortcut</button>
+                                        <!-- <button id="replyLoopButton">➰ reply loop</button> -->
+                                    </div>
+                                </div>
+                                <button id="threadOptionsButton"
+                                    style="min-width:80px; margin-top:0.25rem;">options</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rightColumn" style="width:min-content;" data-visible="no">
+            <div id="customCodeColumn" style="width:min-content; display:none; height:100%;">
+                <div id="customCodeIframeHorizontalResizeBar"></div>
+                <div id="customCodeIframeCtn" style="height:100%; flex-grow:1;"></div>
+            </div>
+        </div>
+    </div>
+
+    <button id="toggleRightColumnButton"
+        style="position:fixed; top:0.5rem; right:0.5rem; min-height:2rem; min-width:2rem; display:none; align-items:center; justify-content:center; z-index:500;">⚛️</button>
+
+
+    <audio id="musicPlayer" style="display:none;"></audio>
+
+    <script type="module" src="Turtle/openc.js"></script>
+
+    <div id="floating-window">
+        <h1>Select a JSON or PNG file to be imported </h1>
+        <button id="cancel-btn" onclick="toggleFloatingWindow()">X</button>
+        <form id="fileForm" enctype="multipart/form-data">
+            <label for="file" class="custom-file-label">Choose File</label>
+            <input type="file" id="file" name="file" accept=".json, .png" required class="custom-file-input"
+                onchange="getAlternateGreetings()" />
+        </form>
+
+
+        <div id="alternateGreetings"></div>
+    </div>
+    <div id="overlayTurtle"></div>
+
+
+    <div id="options-panel" style="
+    display: block;
+    width: 30%;
+    height: 100%;
+    position: fixed; /* Changed from relative to fixed to match CSS */
+    right: 0px;
+    top: 0; /* Added to match CSS */
+    overflow: auto; /* Added to match CSS */
+    background-color: black; /* Added to match CSS */
+    color: lightblue; /* Added to match CSS */
+  " bis_skin_checked="1" class="slide-in-animation">
+
+        <button class="button" style="position: relative; left: 10px; top: 10px" onclick="toggleOptionsPanel()">
+            X
+        </button>
+        <img class="options-panel-background" src="https://ttalesinteractive.com/graphics/pencil.png" />
+        <div style="position: relative" bis_skin_checked="1"></div>
+        <div style="position: relative; bottom: 0%; left: 0px; width: 100%" bis_skin_checked="1">
+            <p style="
+        text-align: center;
+        font-size: 16px;
+        color: #45d4d1;
+        font-weight: bold;
+        text-decoration: underline;
+      ">
+                !WARNING!
+            </p>
+            <p style="font-size: 14px; color: #45d4d1; margin-left: 10px">
+                By enabling any custom prompt you are acknowledging you are 18 years of
+                age or older.
+            </p>
+        </div>
+        <div class="buttonGrid">
+            <select class="optionButton"
+                title="Select an option to change the narration mode. Everything is set to a default SFW mode unless otherwise clicked."
+                id="narrationDropdown">
+                <option value="default">Narration: SFW</option>
+                <option value="GPT4">SFW GPT4-preview</option>
+                <option value="NSFW">Narration: NSFW</option>
+            </select><button class="optionButton" title="Click this button to end the narration loop.
+Bots may hyprfixate on narration, clicking this button will fix that in the NEXT post made by the AI.
+Be sure to click a SFW or NSFW option after a couple of posts to return to better quality once the loop is fixed."
+                id="dialogueFixButton">
+                Narration Loop Fix</button><button class="optionButton" title="Click this button to enable a prompt that will correct an issue where the AI and story become stale.
+This will force the plot to move forward by making the AI think about the narration and suspense.
+This will employ on the next post and help foreshadow the next plot point." id="actionFixButton">
+                No Action Fix-Enable</button><button class="optionButton"
+                title="Click this button to enable TTS using your Elevenlabs API key." id="labsButton">
+                Enable Elevenlabs</button><button class="optionButton" id="statsButton"
+                title="This button will toggle stats on and off.">
+                Toggle Stats</button><button class="optionButton"
+                title="Customize the text style for the AI and yourself." id="textStyleButton">
+                Customize Text</button><button class="optionButton"
+                title="This button will enable an AI to comment on your adventures." id="commentatorCode">
+                Deploy Whiskers</button><button class="optionButton" onclick="showGameInfo()" id="showGameInfoBtn">Show
+                Game Info</button><button class="optionButton" onclick="showEncyclopedia()"
+                id="showEncyclopediaBtn">Show Encyclopedia</button><button class="optionButton"
+                title="Click me to help the AI remember specific details about your current character."
+                id="userDetailButton">
+                {{user}} details</button><button class="optionButton" id="swapButton">
+                Swap to:
+            </button>
+            <select id="dropdown" class="optionButton">
+            </select>
+            <button id="foresightCode" title="This button will enable the AI to plan things out.">
+                Enable Foresight
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div id="news-panel">
+        <button class="button" style="position: relative; left: 10px; top: 10px;" onclick="toggleNewsPanel()">X</button>
+        <img class="news-panel-background" src="https://ttalesinteractive.com/graphics/pencil.png"></img>
+
+        <h2 class="version">Welcome to Beta: 2.1.3</h2>
+
+        <div class="news_wrapper">
+
+        </div>
+
+        <div class="panel_footer" style="font-size: 12px; bottom: 10px;" bis_skin_checked="1">
+            <a class="link" href="https://discord.gg/Tr8vvRUuCv" data-type="page" data-id="533">Discord &amp;
+                Bug Reports</a>
+            <a class="link" href="https://ttalesinteractive.com/?page_id=1560" data-type="page">Support our
+                Devs</a>
+            <a class="link" href="https://ttalesinteractive.com/?page_id=1550" data-type="page" data-id="197">Terms of
+                Service</a>
+            <a class="link" href="https://ttalesinteractive.com/?page_id=1552" data-type="page" data-id="193">Privacy
+                Policy</a>
+        </div>
+
+    </div>
+
+    <div class="templates">
+        <div class="comment">
+            <img src="https://files.catbox.moe/jx78sw.png" alt="" class="commentAvatar">
+            <div class="commentContent">
+                <div class="commentHeader">
+                    <span class="commentAuthor">Tales Interactive</span>
+                    <span class="commentDate">2023-08-31</span>
+                </div>
+                <div class="commentText">
+                    <p>🎉 Version 2.1.3 is live! 🎉</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+</script>
+
+<style>
+    .templates {
+        display: none;
+    }
+    .news_wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding: 2px;
+        overflow-y: auto;
+        /* Add some padding around the content */
+    }
+
+    .comment {
+        display: flex;
+        margin-bottom: 1rem;
+        /* Space between comments */
+        width: 100%;
+        /* Take up the full width of the wrapper */
+        background-color: rgba(255, 255, 255, 0.05);
+        /* Slightly transparent background */
+        padding: 0.75rem;
+        border-radius: 6px;
+    }
+
+    .commentAvatar {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin-right: 1rem;
+        /* Space between avatar and text */
+    }
+
+    .commentContent {
+        flex-grow: 1;
+        /* Allows the content to take up remaining space */
+    }
+
+    .commentHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.25rem;
+    }
+
+    .commentAuthor {
+        font-weight: bold;
+        color: #a8dadc;
+    }
+
+    .commentDate {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    .commentText {
+        color: #e9ecef;
+        line-height: 1.4;
+    }
+
+    .commentText p {
+        margin: 0;
+    }
+</style>
+
+
+<script src="Turtle/addCharacter.js"></script>
+<script src="Turtle/extractCharacterData.js"></script>
+<script src="Turtle/panelManager.js"></script>
+<script src="Turtle/thingy.js"></script>
+
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+</html>

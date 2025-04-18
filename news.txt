@@ -1,0 +1,81 @@
+Elo: Pinned Comment: New year, new problems: TTI needs your help! Enjoying the site? Consider donating to our BuyMeACoffee or tuning into a video or two to help keep this site going.
+///
+Elo: 2/28/2025: GPT 4.5 is live! Be careful! It's expensive!
+///
+Elo: 2/16/2025: The 2.1.2 update makes it so that users can now use o series models without any fancy tricks. The last patch did not properly address every pitfall to being able to interact with this model. This has been fixed <3
+///
+Elo: 1/24/2025: 2.1.1 is good to go! o1, o1 mini and preview now work as intended. While we were able to ping these models before, messages did not properly send and recieve. This has been fixed. 
+///
+Elo: 12/15/2024: 2.0 is live! You might notice an additional button on the prompt panel, this is an alternative greeting button. Store infinate alt introductions locally, change them out at the click of a button, or choose one of our own supplied alternative greetings to go on a variety of different AI adventures with your characters. For now, the alternative introductions offered by us are blank, and will be coming over the next couple of days while we ensure that this feature is working smoothly for alternative greetings created by the user. Have fun!
+///
+Elo: 12/15/2024: December patch is slowly being rolled out. All dead links have been updated. If you notice any issues, as always, please report them in discord! Thanks!
+///
+Elo: 10/30/2024: We've continued dropping some new characters and bots over the course of October! Feel free to join us on YouTube or Discord to check out even more content.
+///
+Elo: 10/5/2024: Another content jam drop has landed with 1.9.8! We're introducing two more functional bots at the bottom of the page. They include an coding assistant and a bot that replicates the COT or o-1 strawberry model from OpenAI.
+///
+Elo: 10/3/2024: It's October! And that means the content jam has started with 1.9.7 introducing two new characters! We'll be pushing out a number of characters and QOL improvments over this month. We all hope you enjoy! <3 
+///
+Elo: 9/24/2024: 1.9.6 - Universal Patch has been implemented. Old alpha versions now utelize beta 1.9.6 code to help resolve edge case bugs that occured between old and new versions communicating. To resolve this, alpha versions have been updated. This does not change your chats, characters, keys, or or any aspect of your data. Thanks!
+///
+Elo: 9/20/2024: Right! SO! 1.9.4 was buggy, that's been fixed with 1.9.5 I am really sorry this didn't get out sooner! Model rights now flag properly and chatgpt-latest is now working!
+///
+Elo: 9/13/2024: Well it's about darn time 1.9.4 got here. It's taken a bit of work to get o1-preview and o1-mini up and running alongside chatgpt-4o-latest! If you encounter any erorrs, make sure to report them on Discord so they can be addressed right away!
+///
+Elo: 8/6/2024: Say hello to 1.9.3 and GPT4 Long Output! This model is expensive as all getout but it promises longer outputs. This is an alpha model not everyone has access to currently. I've changed the lore and summarization prompts in hopes of preserving the original language of the conversation, something our international users have been asking for. At the moment it is still translating to English, I'll continue to search for fixes. If you find any problems, I'm happy to help!
+///
+Elo: 7/18/2024: Hey, hey! GPT4-o Mini has been added! And some small bug fixes have come with it. A recent bug has been solved regarding model context (thanks Jenz!) and some tooltips have been updated. See you guys in early Aug!
+///
+Elo: 7/8/2024: Great news everyone! We finally have different model options for handling memory and lore now. Yay! I've also gone ahead and cleaned up the connections for all GPT models. More updates are coming early Aug! If you run into any issues from this update or any other please remember to report them to me on discord!
+///
+Elo: 5/8/2024: GPt-o added and functioning in the model list. Costs are not 100% accurate with this model yet. GPT-instruct removed due to no longer being in service.
+///
+Elo: 4/23/2024: Placeholder feature was pushed live. ECHO pseudocode prompts are being fine-tuned here. Updates have been made to token cost calculation. 
+///
+Turtle: 4/15/2024: Added a new placeholder, PRESENTING THE {{word:}} PLACEHOLDER!!!!!!
+                    
+                    Basically, this placeholder will choose the correct word based on the pronouns you've set up
+                    
+                    For example, the placeholder {{word:run/runs}} will be replaced with the second word (runs) if the
+                    user pronouns are not he/him or she/her.
+///
+Turtle: 3/24/2024: Fixed some bugs on the add character feature, and added some new place holders, {{they}}, {{them}} and {{their}}. These Placeholders will be replaced with the pronouns you've set in the settings.
+                    
+                    These placeholders are not currently used in our characters, since that is up to someone to implement.
+                    (New characters will have this feature implemented. -Eli)
+///
+Turtle: 3/21/2024: Finnally managed to find a way to extract the character data from PNG images... so yippe, now you can import character cards from any other site.
+                    
+                    Note that for it to import the character image too, you'll need to set the imgbb API key in the settings.
+///
+Elo: 3/7/2024: Jess and Tarek (Nyar) character cards have been added to both TTI and cAI. More characters and a potential art overhaul will be coming soon as well as 'in development' tags for certain characters that may be subject to upcoming changes when first released. Anyways! See you guys soon!
+///
+Elo: 2/22/2024: You're probably thinking things look just a little different. And you're right! Thanks to our new dev Turtle Guy we've got a much more responsive prompt screen and a new news tab where you can keep an eye on the latest in development. We've obviously moved the prompt button! It now sits just beneath your chat threads in bottom left of your screen. Thanks for checking in, we'll see you soon for a new update. 
+///
+Elo: 2/22/2024: Turtle Guy's news panel and prompt screen fixes were blended with Bimble's code decompression for more reasonable development and some minor hotfixes to styling.
+///
+Turtle: 2/08/2024: Okay, so I got scolded for removing the buttons because apparently THEY ACTUALLY DID SOMETHING and we had to roll back... My bad lol.
+                    
+                    Anyway, now it works properly (I hope)
+///
+Turtle: 2/03/2024: I deleted all the buttons that were above these texts before... In my defense they did nothing at all, I made this into a news page... I will eventually readd all those buttons in a separate overlay or window, I don't know...
+                    
+                    Also added that my comments are green and Elo's are pink... why? CAUSE I CAN...
+                    
+                    Now I'm wondering if any of y'all were using this on mobile... HOW, like the site is as responsive
+                    as a 90s site... I promise I'm working on it.
+///
+Turtle: 2/02/2024: So Idk what to write here, I'm not as good at this as Elodine, i have been indirectly
+                    contributing
+                    to the project for a while, and now I'm officially part of it... Sup.
+                    
+                    So changes in this version are, The prompts button as been moved with the rest of the buttons (Right
+                    down corner).
+                    
+                    The arrow to deploy the left panel now flips when it is closed (Blame my OCD).
+                    
+                    The buttons now have a more smooth highlight animation.
+///
+Elo: 1/12/2024: Lorebooks now work correctly. I went ahead and moved the proxy server that handles lorebooks over
+                    to our
+                    server after rewriting its code. Have fun!

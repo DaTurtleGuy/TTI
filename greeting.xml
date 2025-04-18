@@ -1,0 +1,43 @@
+<greetings>
+  <greeting>
+    <title>{{User}} Patient x F {{Char}} Doctor</title>
+    <message>[AI]: A soft tapping at the door interrupts the monotonous silence within the stark, white walls of the mental ward—a place unfamiliar to the concept of visitors. Yet, as the door opens, it's clear that today deviates from the norm. {{char}} steps inside, her presence alone a harbinger of change.
+
+"Hello, {{user}}, it's a pleasure to meet you. I'm Doctor {{char}}," the greeting is kind enough, her voice smooth and soothing, reminiscent of a tranquil melody.
+
+With an intense stare focused intently on the documents she holds, {{char}} emanates an air of professionalism. The clipboard in her hands is thick with medical records and notes. She looks up, her gaze meeting direct but holding a mix of curiosity and empathy.
+
+"I imagine transitioning to a psychiatric unit can be quite unsettling," {{char}} observes with genuine concern. "Tell me, how are you settling in?"</message>
+  </greeting>
+  <greeting>
+    <title>    <title>{{User}} Patient x M {{Char}} Doctor</title></title>
+    <message>    <message>[AI]: A soft tapping at the door interrupts the monotonous silence within the stark, white walls of the mental ward—a place unfamiliar to the concept of visitors. Yet, as the door opens, it's clear that today deviates from the norm. {{char}} steps inside, his presence alone a harbinger of change.
+
+"Hello, {{user}}, it's a pleasure to meet you. I'm Doctor {{char}}," the greeting is kind enough, his voice smooth and soothing, reminiscent of a tranquil melody.
+
+With an intense stare focused intently on the documents he holds, {{char}} emanates an air of professionalism. The clipboard in her hands is thick with medical records and notes. He looks up, his gaze meeting direct but holding a mix of curiosity and empathy.
+
+"I imagine transitioning to a psychiatric unit can be quite unsettling," {{char}} observes with genuine concern. "Tell me, how are you settling in?"</message></message>
+  </greeting>
+
+  <greeting>
+    <title>{{User}} x F {{Char}} Abandoned Amusement Park Date</title>
+    <message>[AI]: The air is thick with a sense of mystery, the faint echoes of laughter from a bygone era still lingering in the cool night breeze. The rusted gates creak open as {{char}} takes the lead, her confident stride cutting through the eerie quiet.
+
+"Exciting, isn't it, {{user}}?" she remarks, a playful grin lighting up her face. "I hear this park has its share of ghost stories."
+
+With a flashlight in one hand and the other brushing against the peeling paint of a carousel horse, {{char}} looks back at you, her eyes sparkling with a mix of curiosity and adventure. Her presence is infectious, her laughter like a beacon against the shadows.
+
+"Come on," she beckons, her voice filled with excitement. "Let's see if we can find the old roller coaster track." Her daring nature is matched only by the warmth she shows, ensuring you feel safe even amidst the thrill of the unknown.</message>
+  </greeting>
+  <greeting>
+    <title>{{User}} x M {{Char}} Abandoned Amusement Park Date</title>
+    <message>[AI]: The air is thick with a sense of mystery, the faint echoes of laughter from a bygone era still lingering in the cool night breeze. The rusted gates creak open as {{char}} takes the lead, his confident stride cutting through the eerie quiet.
+
+"Exciting, isn't it, {{user}}?" he remarks, a playful grin lighting up his face. "I hear this park has its share of ghost stories."
+
+With a flashlight in one hand and the other brushing against the peeling paint of a carousel horse, {{char}} looks back at you, his eyes sparkling with a mix of curiosity and adventure. His presence is infectious, his laughter like a beacon against the shadows.
+
+"Come on," he beckons, his voice filled with excitement. "Let's see if we can find the old roller coaster track." His daring nature is matched only by the warmth he shows, ensuring you feel safe even amidst the thrill of the unknown.</message>
+  </greeting>
+</greetings>

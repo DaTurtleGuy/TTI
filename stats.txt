@@ -1,0 +1,69 @@
+let numMessagesInContext = 4; // Number of historical messages to consider
+let isInitialStatsSet = false; // Flag to check if initial stats have been set
+
+oc.thread.on("MessageAdded", async function() {
+  // Retrieve the player's name from the most recent user message
+  let lastUserMessage = oc.thread.messages.slice().reverse().find(m => m.author === "user");
+  let playerName = lastUserMessage ? lastUserMessage.name : "Player"; // Default player name
+  let characterName = oc.character.name || "Character"; // Default character name
+
+  // Check if the initial stat block needs to be set
+  if (!isInitialStatsSet) {
+    let initialStatContent = `**Stat Screen Details:**\n- ${playerName} Health: 100/100\n- ${playerName} Madness: 0/100\n- ${characterName} Affection: 50/100`;
+    oc.thread.messages.push({
+      author: "system",
+      hiddenFrom: ["user", "ai"],
+      content: initialStatContent,
+    });
+    isInitialStatsSet = true; // Update the flag
+    return; // Exit early since we just needed to set the initial stats
+  }
+
+  // Proceed with the rest of the logic
+  if(oc.thread.messages.filter(m => m.author === "ai").length < 2) return;
+  let lastMessage = oc.thread.messages.at(-1);
+  if(lastMessage.author !== "ai") return;
+
+  let summarySystemMessage = oc.thread.messages.findLast(m => 
+    m.author === "system" && m.content.trim().toLowerCase().startsWith("**stat screen details:**")
+  );
+
+  // Prepare the chat completion request for health, madness, and affection tracking
+  let questionText = `Please update ${playerName}'s health and madness stats based on the latest development in the story. In addition, you will need to update ${characterName}'s affection stat appropriately based on the stories development:
+
+---
+${lastMessage.content}
+---
+
+Your response should reflect any changes or remain the same if there are none. The format should be:
+- "${playerName} Health: value/100"
+- "${playerName} Madness: value/100"
+- "${characterName} Affection: value/100"`;
+
+  console.log("questionText:", questionText);
+
+  // Send the chat completion request
+  let response = await oc.getChatCompletion({
+    messages: [
+      {author: "system", content: `You are a stat tracking system. Update ${playerName}'s health and madness, based on the latest game developments. Do not forget to update ${characterName}'s affection based on the latest narrative developments.`},
+      {author: "user", content: questionText},
+    ],
+  });
+
+  // Extract and format the response for each stat
+  let healthMatch = response.match(/Health: (\d+)\/100/);
+  let madnessMatch = response.match(/Madness: (\d+)\/100/);
+  let affectionMatch = response.match(/Affection: (\d+)\/100/);
+
+  let formattedResponse = `**Stat Screen Details:**\n- ${playerName} Health: ${healthMatch ? healthMatch[1] : '100'}/100\n- ${playerName} Madness: ${madnessMatch ? madnessMatch[1] : '0'}/100\n- ${characterName} Affection: ${affectionMatch ? affectionMatch[1] : '50'}/100`;
+
+  // Update or create the summary message
+  if(summarySystemMessage) {
+    summarySystemMessage.content = formattedResponse;
+    // Remove summary message from oc.thread.messages array
+    oc.thread.messages = oc.thread.messages.filter(m => m !== summarySystemMessage);
+  } else {
+    summarySystemMessage = {author: "system", content: formattedResponse, expectsReply: false};
+  }
+  oc.thread.messages.push(summarySystemMessage);
+});

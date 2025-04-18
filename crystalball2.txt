@@ -1,0 +1,27 @@
+// Function to extract spoiler text including everything after [spoiler]
+function extractSpoilerText(content) {
+  const spoilerRegex = /\[spoiler\](.*)/gis;
+  let match = spoilerRegex.exec(content);
+  return match ? match[1].trim() : '';
+}
+
+// Add a function to oc.messageRenderingPipeline
+oc.messageRenderingPipeline.push(function({message}) {
+  // Replace [spoiler] and everything after it with a span of reduced font size
+  message.content = message.content.replace(/\[spoiler\](.*)/gis, '<span class="spoiler" style="font-size:1px; color:transparent;">$1</span>');
+});
+
+// Use MessageAdded event to push new message
+oc.thread.on("MessageAdded", function({message}) {
+  // Extract spoiler text to add as a new message
+  const spoilerText = extractSpoilerText(message.content);
+  if (spoilerText) {
+    // Add a new message with the spoiler text, hidden from the AI
+    oc.thread.messages.push({
+      author: "system",
+      name: "Spoiler System",
+      content: spoilerText,
+      hiddenFrom: ["ai", "user"]
+    });
+  }
+});
